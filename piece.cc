@@ -1,4 +1,6 @@
 #include "piece.h"
+#include <iostream>
+using namespace std;
 
 Piece::Piece(Color col, int posX, int posY) : color(col), x(posX), y(posY) {}
 
@@ -27,3 +29,5 @@ int Piece::getY() const {
 void Piece::setY(int posY) {
     y = posY;
 }
+
+// isValidMove is pure virtual. Will be inherited in derived classes.
