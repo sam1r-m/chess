@@ -12,13 +12,15 @@ private:
     int y;
 
 public:
-    Piece(Color col, int posX, int posY);
+    Piece(Color color, int posX, int posY);
     virtual ~Piece();
+
     Color getColor() const;
-    void setColor(Color col);
     int getX() const;
-    void setX(int posX);
     int getY() const;
+
+    void setColor(Color color);
+    void setX(int posX);
     void setY(int posY);
 
     virtual bool isValidMove(int toX, int toY) const = 0;
