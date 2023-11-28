@@ -1,8 +1,7 @@
-#include <iostream>
-using namespace std;
+#ifndef __PIECE_H__
+#define __PIECE_H__
 
-#ifndef PIECE_H
-#define PIECE_H
+#include <iostream>
 
 enum class Color { WHITE, BLACK };
 
