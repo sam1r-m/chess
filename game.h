@@ -20,7 +20,10 @@ private:
 public:
     Game();
     void startGame();
-    bool makeMove(int fromX, int fromY, int toX, int toY);
+    vector<int> convert(string value);
+    void addPieceat(string value);
+    void removePieceat(string value);
+    bool makeMove(string from, string to);
     bool isCheckmate(Color color) const; 
     bool isStalemate(Color color) const; 
     void switchTurn();
