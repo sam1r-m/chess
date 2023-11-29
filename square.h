@@ -15,6 +15,8 @@ class Square {
 
     int getX();
     int getY();
+    Piece *getPiece();
+
     bool isOccupied();
 };
 

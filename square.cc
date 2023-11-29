@@ -3,7 +3,7 @@
 Square::Square(int xPos, int yPos): xPos {xPos}, yPos {yPos} {}
 
 Square::~Square(){
-    
+
 }
 
 int Square::getX(){
@@ -12,6 +12,10 @@ int Square::getX(){
 
 int Square::getY(){
     return yPos;
+}
+
+Piece *Square::getPiece(){
+    return piece;
 }
 
 bool Square::isOccupied(){

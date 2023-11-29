@@ -5,6 +5,12 @@
 #include "square.h"
 #include "subject.h"
 #include "piece.h"
+#include "pawn.h"
+#include "rook.h"
+#include "knight.h"
+#include "bishop.h"
+#include "queen.h"
+#include "king.h"
 
 #include <vector>
 #include <string>
@@ -29,8 +35,8 @@ class Board: public Subject {
     bool isCheckmate(Color color) const;
     bool isStalemate(Color color) const; 
 
-    void addPieceAt(Square *square, Color color, Piece piece);
-    void removePieceAt(Square *square);
+    void addPieceAt(int x, int y, Color color, std::unique_ptr<Piece> piece);
+    void removePieceAt(int x, int y);
 
     bool makeMove(int fromX, int fromY, int toX, int toY);
 
