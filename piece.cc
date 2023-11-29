@@ -30,4 +30,4 @@ void Piece::setY(int posY) {
     y = posY;
 }
 
-// isValidMove is pure virtual. Will be inherited in derived classes.
+// isValidMove is pure virtual. Will be implemented in derived classes.
