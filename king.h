@@ -2,7 +2,6 @@
 #define __KING_H__
 #include <iostream>
 #include "piece.h"
-using namespace std;
 
 enum class Color { WHITE, BLACK };
 

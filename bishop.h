@@ -2,7 +2,6 @@
 #define __BISHOP_H__
 #include <iostream>
 #include "piece.h"
-using namespace std;
 
 enum class Color { WHITE, BLACK };
 
