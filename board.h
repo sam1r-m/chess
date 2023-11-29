@@ -4,6 +4,7 @@
 
 #include "square.h"
 #include "subject.h"
+#include "piece.h"
 
 #include <vector>
 #include <string>

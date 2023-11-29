@@ -3,8 +3,7 @@
 
 #include <vector>
 #include <iostream>
-
-class Piece;
+#include "piece.h"
 
 class Square {
     const int xPos;
@@ -16,6 +15,7 @@ class Square {
 
     int getX();
     int getY();
+    bool isOccupied();
 };
 
 std::ostream& operator<<(std::ostream &out, Square &square); // For TextDisplay
