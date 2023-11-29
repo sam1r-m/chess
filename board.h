@@ -9,12 +9,14 @@
 #include <vector>
 #include <string>
 #include <memory>
+#include <iostream>
 
 enum class Color { WHITE, BLACK };
 
 class Board: public Subject {
     std::vector<std::vector<Square>> board; // 2D array of Squares
     std::vector<std::unique_ptr<Piece>> pieces; // All the pieces on the board (maybe make it shared ptr?)
+    int boardSize = 8;
 
     public:
     Board();
@@ -22,7 +24,6 @@ class Board: public Subject {
 
     void initializeBoard();
     void resetBoard();
-
 
     bool isCheck(Color color) const;
     bool isCheckmate(Color color) const;
@@ -34,5 +35,7 @@ class Board: public Subject {
     bool makeMove(int fromX, int fromY, int toX, int toY);
 
 };
+
+std::ostream &operator<<(std::ostream &out, const Board &b);
 
 #endif
