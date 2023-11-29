@@ -24,6 +24,7 @@ public:
     void setY(int posY);
 
     virtual bool isValidMove(int toX, int toY) const = 0;
+    virtual char getChar() const = 0;
 };
 
 #endif

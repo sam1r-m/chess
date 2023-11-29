@@ -10,3 +10,8 @@ Pawn::~Pawn(){
 bool Pawn::isValidMove(int toX, int toY) const{
 
 }
+
+char Pawn::getChar() const{
+    if (getColor() == Color::BLACK) return 'p';
+    else return 'P';
+}

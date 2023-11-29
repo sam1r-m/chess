@@ -10,3 +10,8 @@ King::~King(){
 bool King::isValidMove(int toX, int toY) const{
 
 }
+
+char King::getChar() const{
+    if (getColor() == Color::BLACK) return 'k';
+    else return 'K';
+}

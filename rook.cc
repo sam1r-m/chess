@@ -10,3 +10,8 @@ Rook::~Rook(){
 bool Rook::isValidMove(int toX, int toY) const{
 
 }
+
+char Rook::getChar() const{
+    if (getColor() == Color::BLACK) return 'r';
+    else return 'R';
+}

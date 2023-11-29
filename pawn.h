@@ -13,6 +13,7 @@ public:
     ~Pawn();
 
     bool isValidMove(int toX, int toY) const override;
+    char getChar() const override;
 };
 
 #endif
