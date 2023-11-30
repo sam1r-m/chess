@@ -1,6 +1,6 @@
 #include "game.h"
 
-Game::Game(std::unique_ptr<Board> b): board {std::move(b)} {}
+Game::Game(Board b): board {b} {}
 
 void Game::processCommand(const std::string& command) {
     std::istringstream iss(command);
