@@ -22,7 +22,7 @@ enum class Color { WHITE, BLACK };
 class Board: public Subject {
     std::vector<std::vector<Square>> board; // 2D array of Squares
     std::vector<std::unique_ptr<Piece>> pieces; // All the pieces on the board (maybe make it shared ptr?)
-    int boardSize = 8;
+    const int boardSize = 8;
 
     public:
     Board();

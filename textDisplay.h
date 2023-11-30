@@ -4,6 +4,9 @@
 #include "observer.h"
 
 class TextDisplay: public Observer {
+    std::vector<std::vector<char>> theDisplay;
+    const int boardSize = 8;
+    
     public:
     TextDisplay();
     ~TextDisplay();
