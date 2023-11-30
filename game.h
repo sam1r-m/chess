@@ -17,19 +17,14 @@ class Game {
     bool gameMode = false;  //true if a game is ongoing
     bool setUpMode = false; //true if in setup mode
     bool blackTurn = false; //true if it is black's turn, false if it is white's
-    bool checkmate = false; //true if either player is in checkmate (might change later)
+    bool checkmate = false; //true if either player is in checkmate/loses (might change later)
     std::unique_ptr<Player> whitePlayer; 
     std::unique_ptr<Player> blackPlayer;
-    int whiteScore, blackScore; //stores white and black's scores
+    float whiteScore, blackScore; //stores white and black's scores
 
-    //make helper to convert coordinate string to ints
-    //make helper to convert piece string to piece
-
+    std::vector<int> convert(string val);
     void startGame(std::string wp, std::string bp);
-    vector<int> convert(string val);
-    void movePiece(std::string start, std::string end); 
     void addPiece(std::string pieceType, std::string posn);
-    void rmPiece(std::string posn);
     void changeTurn(std::string color);
     void endGame();
 

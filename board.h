@@ -35,7 +35,7 @@ class Board: public Subject {
     bool isCheckmate(Color color) const;
     bool isStalemate(Color color) const; 
 
-    void addPieceAt(int x, int y, Color color, std::unique_ptr<Piece> piece);
+    void addPieceAt(int x, int y, std::unique_ptr<Piece> piece);
     void removePieceAt(int x, int y);
 
     bool makeMove(int fromX, int fromY, int toX, int toY);
