@@ -18,7 +18,6 @@ class Game {
     bool setUpMode = false; //true if in setup mode
     bool blackTurn = false; //true if it is black's turn, false if it is white's
     bool checkmate = false; //true if either player is in checkmate (might change later)
-    vector<int> Game::convert(string val);
     std::unique_ptr<Player> whitePlayer; 
     std::unique_ptr<Player> blackPlayer;
     int whiteScore, blackScore; //stores white and black's scores
@@ -27,9 +26,10 @@ class Game {
     //make helper to convert piece string to piece
 
     void startGame(std::string wp, std::string bp);
-    //void movePiece(std::string start, std::string end); 
-    //void addPiece(std::string pieceType, std::string posn);
-    //void rmPiece(std::string posn);
+    vector<int> convert(string val);
+    void movePiece(std::string start, std::string end); 
+    void addPiece(std::string pieceType, std::string posn);
+    void rmPiece(std::string posn);
     void changeTurn(std::string color);
     void endGame();
 

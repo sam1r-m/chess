@@ -1,9 +1,6 @@
 #ifndef __QUEEN_H__
 #define __QUEEN_H__
-#include <iostream>
 #include "piece.h"
-
-enum class Color { WHITE, BLACK };
 
 class Queen: public Piece{
 

@@ -24,7 +24,7 @@ void Game::processCommand(const std::string& command) {
         } else if (cmd == "move") {
             std::string start, end;
             iss >> start >> end;
-            //movePiece(start, end);
+            movePiece(start, end);
 
             if (checkmate) {
                 endGame();
@@ -43,12 +43,12 @@ void Game::processCommand(const std::string& command) {
         if (cmd == "+") {
             std::string pieceType, posn;
             iss >> pieceType >> posn;
-            //addPiece(pieceType, posn);
+            addPiece(pieceType, posn);
 
         } else if (cmd == "-") {
             std::string posn;
             iss >> posn;
-            //rmPiece(posn);
+            rmPiece(posn);
 
         } else if (cmd == "=") {
             std::string color;
@@ -129,6 +129,7 @@ void Game::movePiece(string start, string end) {
     int toY = to_coordinate[1];
     board.makeMove(fromX, fromY, toX, toY);
 }
+
 void Game::addPiece(string pieceType, string posn) {
     vector<int> coordinate = convert(posn);
     int x = coordinate[0];

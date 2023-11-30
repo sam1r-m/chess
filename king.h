@@ -1,9 +1,6 @@
 #ifndef __KING_H__
 #define __KING_H__
-#include <iostream>
 #include "piece.h"
-
-enum class Color { WHITE, BLACK };
 
 class King: public Piece{
     bool firstMove; // to check if castling is possible

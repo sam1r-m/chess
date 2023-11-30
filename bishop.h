@@ -1,9 +1,6 @@
 #ifndef __BISHOP_H__
 #define __BISHOP_H__
-#include <iostream>
 #include "piece.h"
-
-enum class Color { WHITE, BLACK };
 
 class Bishop: public Piece{
 
