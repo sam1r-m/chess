@@ -1,11 +1,10 @@
 #ifndef __OBSERVER_H__
 #define __OBSERVER_H__
-
-class Subject;
+#include "square.h"
 
 class Observer {
 public:
-    virtual void update() = 0;
+    virtual void notify(Square &s) = 0;
     virtual ~Observer() = default; // default virtual destructor
 };
 

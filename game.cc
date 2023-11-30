@@ -23,6 +23,8 @@ void Game::processCommand(const std::string& command) {
             std::string start, end;
             iss >> start >> end;
 
+            //different for computer, pawn promotion takes 
+            //  in additional argument
             vector<int> from_coordinate = convert(start);
             vector<int> to_coordinate = convert(end);
             int fromX = from_coordinate[0];
