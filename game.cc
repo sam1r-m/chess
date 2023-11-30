@@ -34,7 +34,25 @@ void Game::processCommand(const std::string& command) {
             board.makeMove(fromX, fromY, toX, toY);
 
             if (checkmate) {
+                cout << "Checkmate! ";
+                blackTurn = !blackTurn;
                 endGame();
+
+            } else if (staleMate) {
+                whiteScore += 0.5;
+                blackScore += 0.5;
+                cout << "Stalemate!" << endl;
+
+            } else if (check) {
+                blackTurn = !blackTurn;
+
+                if (blackTurn) {
+                    cout << "Black";
+                } else {
+                    cout << "White";
+                }
+                cout << " is in check."  << endl;
+
             }
 
         } else {
@@ -202,8 +220,10 @@ void Game::changeTurn(std::string color){
 void Game::endGame(){
     if (blackTurn){
         whiteScore++;
+        cout << "White wins!" << endl;
     } else {
         blackScore++;
+        cout << "Black wins!" << endl;
     }
 
     gameMode = false;
