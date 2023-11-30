@@ -1,5 +1,7 @@
 #include "game.h"
-
+#include <vector>
+#include <string>
+using namespace std;
 //make helper to convert coordinate string to ints
 //make helper to convert piece string to piece
 
@@ -103,6 +105,67 @@ void Game::startGame(std::string wp, std::string bp){
 
     if (validPlayer) gameMode = true;
     else std::cout << "Invalid player type." << std::endl;
+}
+
+vector<int> Game::convert(string val) {
+    string row = "abcdefgh";
+    char base = val[1];
+    int row_int[8] = {1,2,3,4,5,6,7,8};
+    int index_x = row.find(val[0]);
+    vector<int> cooordinate;
+    int x = row_int[index_x];
+    int y = base - '0';
+    cooordinate.emplace_back(x);
+    cooordinate.emplace_back(y);
+    return cooordinate;
+}
+
+void Game::movePiece(string start, string end) {
+    vector<int> from_coordinate = convert(start);
+    vector<int> to_coordinate = convert(end);
+    int fromX = from_coordinate[0];
+    int fromY = from_coordinate[1];
+    int toX = to_coordinate[0];
+    int toY = to_coordinate[1];
+    board.makeMove(fromX, fromY, toX, toY);
+}
+void Game::addPiece(string pieceType, string posn) {
+    vector<int> coordinate = convert(posn);
+    int x = coordinate[0];
+    int y = coordinate[1];
+    std::unique_ptr<Piece> newPiece;
+    Color pieceColor = blackTurn ? Color::BLACK : Color::WHITE;
+    if (pieceType == "pawn") {
+        newPiece = std::make_unique<Pawn>(pieceColor, x, y);
+        board.addPieceAt(x,y,pieceColor,std::move(newPiece));
+    }
+    else if (pieceType == "king") {
+        newPiece = std::make_unique<King>(pieceColor, x, y);
+        board.addPieceAt(x,y,pieceColor,std::move(newPiece));
+    }
+    else if (pieceType == "Queen") {
+        newPiece = std::make_unique<Queen>(pieceColor, x, y);
+        board.addPieceAt(x,y,pieceColor,std::move(newPiece));
+    }
+    else if (pieceType == "rook") {
+        newPiece = std::make_unique<Rook>(pieceColor, x, y);
+        board.addPieceAt(x,y,pieceColor,std::move(newPiece));
+    }
+    else if (pieceType == "bishop") {
+        newPiece = std::make_unique<Bishop>(pieceColor, x, y);
+        board.addPieceAt(x,y,pieceColor,std::move(newPiece));
+    }
+    else if (pieceType == "knight") {
+        newPiece = std::make_unique<Knight>(pieceColor, x, y);
+        board.addPieceAt(x,y,pieceColor,std::move(newPiece));
+    }
+}
+
+void Game::rmPiece(string posn) {
+    vector<int> coordinates = convert(posn);
+    int x = coordinates[0];
+    int y = coordinates[1];
+    board.removePieceAt(x,y);
 }
 
 void Game::changeTurn(std::string color){
