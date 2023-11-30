@@ -1,45 +1,29 @@
 #include "game.h"
-#include "piece.h"
-#include <iostream>
-using namespace std;
 
-Game::Game() {
+Game::Game(std::unique_ptr<Board> b): board {std::move(b)} {}
 
-}
+void Game::processCommand(const std::string& command) {
+    std::istringstream iss(command);
+    std::string cmd;
+    iss >> cmd;
 
-void Game::startGame() {
-    // board.initializeBoard();
-}
+    if (cmd == "game"){
+        std::string whitePlayer, blackPlayer;
+        std::cin >> whitePlayer >> blackPlayer;
+        startGame(whitePlayer, blackPlayer);
 
-vector<int> Game::convert(string value) {
-    // will convert the string to an array of integer of length two.
-    // example: if value is a2, the function would return [1,1]
-}
+    } else if (cmd == "resign") {
+        resign();
 
-void Game::addPieceat(string value) {
-    // uses convert to get vector
-    // calls board.addPieceat() with the first and the second index
-}
+    } else if (cmd == "move") {
+        std::string start, end;
+        std::cin >> start >> end;
+        movePiece(start, end);
 
-void Game::removePieceat(string value) {
-    // uses convert to get vector
-    // calls board.removePieceat() with the first and the second index
-}
+    } else if (cmd == "setup") {
 
-bool Game::makeMove(string from, string to) {
-    // for move a2 a3
-    // convert(from) = [1,1] and convert(to) = [1,2]
-    // can pass data to makeMove in board using the necessary indexes of the two arrays above.
-}
 
-bool Game::isCheckmate(Color color) const {
-    // return board.isCheckmate(color);
-}
-
-bool Game::isStalemate(Color color) const {
-    // return board.isStalemate(color);
-}
-
-void Game::switchTurn() {
-    // isWhiteTurn = !isWhiteTurn;
+    } else {
+        std::cout << "Invalid command." << std::endl;
+    }
 }

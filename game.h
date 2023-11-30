@@ -1,32 +1,20 @@
 // Controller
-#ifndef __GAME_H__
-#define __GAME_H__
-
-#include "board.h"
-#include "piece.h"
-
-#include <vector>
-#include <string>
-#include <memory>
 #include <iostream>
-
-enum class Color { WHITE, BLACK };
+#include <vector>
+#include <sstream>
+#include <string>
+#include "board.h"
 
 class Game {
-private:
-    Board board;
-    bool isWhiteTurn;
+    std::unique_ptr<Board> board;
+    
+
+    void startGame(std::string p1, std::string p2);
+    void resign();
+    void movePiece(std::string start, std::string end); //translate string to int coordinates
 
 public:
-    Game();
-    void startGame();
-    vector<int> convert(string value);
-    void addPieceat(string value);
-    void removePieceat(string value);
-    bool makeMove(string from, string to);
-    bool isCheckmate(Color color) const; 
-    bool isStalemate(Color color) const; 
-    void switchTurn();
-};
+    Game(std::unique_ptr<Board> b);
 
-#endif
+    void processCommand(const std::string& command);
+};
