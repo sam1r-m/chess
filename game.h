@@ -9,13 +9,19 @@
 class Game {
     Board board;
     bool gameMode = false;
-    bool setupMode = false;
+    bool setUpMode = false;
     bool blackTurn = false;
-
+    bool checkmate = false; //might change later
+    std::unique_ptr<Player> whitePlayer; 
+    std::unique_ptr<Player> blackPlayer; 
+    int whiteScore, blackScore;
 
     void startGame(std::string p1, std::string p2);
     void resign();
-    void movePiece(std::string start, std::string end); //translate string to int coordinates
+    void movePiece(std::string start, std::string end); 
+    void addPiece(std::string pieceType, std::string posn);
+    void rmPiece(std::string posn);
+    void endGame();
 
 public:
     Game(Board b);
