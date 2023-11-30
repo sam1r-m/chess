@@ -113,6 +113,14 @@ void Game::processCommand(const std::string& command) {
     }
 }
 
+float Game::getWScore(){
+    return whiteScore;
+}
+
+float Game::getBScore(){
+    return blackScore;
+}
+
 vector<int> Game::convert(string val) {
     string row = "abcdefgh";
     char base = val[1];

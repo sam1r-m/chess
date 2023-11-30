@@ -34,4 +34,6 @@ public:
     Game(Board b);
 
     void processCommand(const std::string& command);
+    float getWScore();
+    float getBScore();
 };
