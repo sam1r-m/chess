@@ -9,6 +9,12 @@ TextDisplay::TextDisplay(){
     std::vector<char> row = {' ', '_', ' ', '_', ' ', '_', ' ', '_'};
     std::vector<char> row1 = {'_', ' ', '_', ' ', '_', ' ', '_', ' '};
 
+    //set up the grid
+    for (int i = 0; i < boardSize / 2; ++i) {
+        theDisplay.emplace_back(row);
+        theDisplay.emplace_back(row1);
+    }
+
     //initialize black pieces
     addPiece(0, 0, 'r');
     addPiece(1, 0, 'n');
@@ -22,11 +28,6 @@ TextDisplay::TextDisplay(){
     for (int i = 0; i < boardSize; ++i) {
         addPiece(i, 1, 'p');
     }
-
-    theDisplay.emplace_back(row);
-    theDisplay.emplace_back(row1);
-    theDisplay.emplace_back(row);
-    theDisplay.emplace_back(row1);
 
     //initialize white pieces
     for (int j = 0; j < boardSize; ++j) {
@@ -59,6 +60,6 @@ std::ostream &operator<<(std::ostream &out, const TextDisplay &td){
         }
         out << '\n';
     }
-    out << "\nabcdefgh\n";
+    out << "\n  abcdefgh\n";
     return out;
 }
