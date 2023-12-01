@@ -11,6 +11,29 @@ void Game::processCommand(const std::string& command) {
     std::string cmd;
     iss >> cmd;
 
+    // first command must be game or setup
+    if (!gameMode && !setUpMode){
+
+        if (cmd == "game"){
+            gameMode = true;
+            std::string wp, bp;
+            iss >> wp >> bp;
+            startGame(wp, bp);
+            std::cout << board;
+            return;
+
+        } else if (cmd == "setup") {
+            setUpMode = true;
+            std::cout << board;
+            return;
+
+        } else {
+            std::cout << "Invalid command." << std::endl;
+
+        }
+
+    }
+
     // check if Game is in gameMode, only accepts resign
     //  or move commands
     if (gameMode){
@@ -63,7 +86,7 @@ void Game::processCommand(const std::string& command) {
 
     // check if Game is in setUpMode, only accepts +, -, =, 
     //  and done commands
-    if (setUpMode){
+    if (setUpMode) {
         
         if (cmd == "+") {
             std::string pieceType, posn;
@@ -88,6 +111,7 @@ void Game::processCommand(const std::string& command) {
 
             //check that there is one king on either side, no pawns are on the
             //  first or last row, and that neitehr king is in check before leaving
+            std::cout << board;
             setUpMode = false;
 
         } else {
@@ -97,21 +121,6 @@ void Game::processCommand(const std::string& command) {
 
     }
 
-    // first command must be game or setup
-    if (cmd == "game"){
-        gameMode = true;
-        std::string wp, bp;
-        iss >> wp >> bp;
-        startGame(wp, bp);
-        std::cout << board;
-
-    } else if (cmd == "setup") {
-        setUpMode = true;
-
-    } else {
-        std::cout << "Invalid command." << std::endl;
-
-    }
 }
 
 float Game::getWScore(){

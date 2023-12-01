@@ -35,8 +35,12 @@ void Board::addPieceAt(int x, int y, std::unique_ptr<Piece> piece){
 }
 
 void Board::removePieceAt(int x, int y){
-    changeCoords(&x, &y);
+    for (int i = 0; i < pieces.size(); ++i){
+	    
+    } 
 
+    changeCoords(&x, &y);
+    
 }
 
 bool Board::makeMove(int fromX, int fromY, int toX, int toY){
