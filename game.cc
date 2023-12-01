@@ -122,8 +122,8 @@ float Game::getBScore(){
     return blackScore;
 }
 
-vector<int> Game::convert(string val) {
-    string row = "abcdefgh";
+vector<int> Game::convert(std::string val) {
+    std::string row = "abcdefgh";
     char base = val[1];
     int row_int[8] = {1,2,3,4,5,6,7,8};
     int index_x = row.find(val[0]);

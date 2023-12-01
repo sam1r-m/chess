@@ -4,8 +4,6 @@
 #include <vector>
 #include "move.h"
 
-enum class Color { WHITE, BLACK };
-
 class Player {
     Color playerColor;
     std::vector<Move> moves;

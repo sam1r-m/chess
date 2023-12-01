@@ -32,7 +32,7 @@ class Game {
     std::unique_ptr<Player> blackPlayer;
     float whiteScore, blackScore; //stores white and black's scores
 
-    std::vector<int> convert(string val);
+    std::vector<int> convert(std::string val);
     void startGame(std::string wp, std::string bp);
     void addPiece(std::string pieceType, std::string posn);
     void changeTurn(std::string color);
