@@ -3,6 +3,10 @@
 #include <string>
 using namespace std;
 
+bool validCoords(int x, int y) {
+    return (1 <= x) && (x <= 8) && (1 <= y) && (y <= 8);
+}
+
 Game::Game() {}
 
 //board must be redrawn both in text and graphically, each time a move command is issued
@@ -59,7 +63,13 @@ void Game::processCommand(const std::string& command) {
             int fromY = from_coordinate[1];
             int toX = to_coordinate[0];
             int toY = to_coordinate[1];
-            board.makeMove(fromX, fromY, toX, toY);
+
+            if (validCoords(fromX, fromY) && validCoords(toX, toY)){
+                board.makeMove(fromX, fromY, toX, toY);
+            } else {
+                std::cout << "Invalid coordinates." << std::endl;
+                return;
+            }
 
             if (checkmate) {
                 cout << "Checkmate! ";
@@ -84,6 +94,8 @@ void Game::processCommand(const std::string& command) {
 
             }
 
+            std::cout << board;
+
         } else {
             std::cout << "Invalid command." << std::endl;
         }
@@ -106,7 +118,13 @@ void Game::processCommand(const std::string& command) {
             vector<int> coordinates = convert(posn);
             int x = coordinates[0];
             int y = coordinates[1];
-            board.removePieceAt(x,y);
+
+            if (validCoords(x, y)){
+                board.removePieceAt(x,y);
+                std::cout << board;
+            } else {
+                std::cout << "Invalid coordinates." << std::endl;
+            }
 
         } else if (cmd == "=") {
             std::string color;
@@ -176,6 +194,11 @@ void Game::addPiece(string pieceType, string posn) {
     vector<int> coordinate = convert(posn);
     int x = coordinate[0];
     int y = coordinate[1];
+    if (!validCoords(x, y)){
+        std::cout << "Invalid coordinates." << std::endl;
+        return;
+    }
+
     std::unique_ptr<Piece> newPiece;
     
     //black pieces (lowercase)
@@ -231,12 +254,20 @@ void Game::addPiece(string pieceType, string posn) {
     }
     else {
         cout << "Invalid piece type" << endl;
+        return;
     }
+    std::cout << board;
 }
 
 void Game::changeTurn(std::string color){
-    if (color == "black") blackTurn = true;
-    else if (color == "white") blackTurn = false;
+    if (color == "black") {
+        std::cout << "Black's turn." << std::endl;
+        blackTurn = true;
+    } 
+    else if (color == "white") {
+        std::cout << "White's turn." << std::endl;
+        blackTurn = false;
+    }
     else std::cout << "Invalid color." << std::endl;
 }
 
