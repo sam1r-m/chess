@@ -5,6 +5,14 @@
 #include <string>
 
 #include "board.h"
+#include "piece.h"
+#include "pawn.h"
+#include "rook.h"
+#include "knight.h"
+#include "bishop.h"
+#include "queen.h"
+#include "king.h"
+
 #include "player.h"
 #include "human.h"
 #include "computer1.h"

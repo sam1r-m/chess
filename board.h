@@ -6,12 +6,6 @@
 #include "subject.h"
 #include "textDisplay.h"
 #include "piece.h"
-#include "pawn.h"
-#include "rook.h"
-#include "knight.h"
-#include "bishop.h"
-#include "queen.h"
-#include "king.h"
 
 #include <vector>
 #include <string>
@@ -19,6 +13,7 @@
 #include <iostream>
 
 enum class Color { WHITE, BLACK };
+class Piece;
 
 class Board: public Subject {
     std::vector<std::vector<Square>> board; // 2D array of Squares
