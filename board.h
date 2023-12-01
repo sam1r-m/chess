@@ -4,6 +4,7 @@
 
 #include "square.h"
 #include "subject.h"
+#include "textDisplay.h"
 #include "piece.h"
 #include "pawn.h"
 #include "rook.h"
@@ -23,6 +24,7 @@ class Board: public Subject {
     std::vector<std::vector<Square>> board; // 2D array of Squares
     std::vector<std::unique_ptr<Piece>> pieces; // All the pieces on the board (maybe make it shared ptr?)
     const int boardSize = 8;
+    std::unique_ptr<TextDisplay> td;
 
     public:
     Board();
@@ -41,9 +43,7 @@ class Board: public Subject {
     void removePieceAt(int x, int y);
 
     bool makeMove(int fromX, int fromY, int toX, int toY);
-
+    friend std::ostream &operator<<(std::ostream &out, const Board &b);
 };
-
-std::ostream &operator<<(std::ostream &out, const Board &b);
 
 #endif

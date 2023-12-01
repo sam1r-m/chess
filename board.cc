@@ -8,6 +8,7 @@ void changeCoords(int *x, int *y){
 }
 
 Board::Board(){
+    td = std::make_unique<TextDisplay>();
 
     // create rows of squares with corresponding coordinates
     for (int i = boardSize; i > 0; --i){
@@ -53,4 +54,9 @@ const Square& Board::getSquareAt(int x, int y) const {
 
 const vector<vector<Square>>& Board::getBoard() const {
     return board;
+}
+
+std::ostream &operator<<(std::ostream &out, const Board &b){
+    out << *(b.td);
+    return out;
 }

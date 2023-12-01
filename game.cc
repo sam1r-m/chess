@@ -3,7 +3,7 @@
 #include <string>
 using namespace std;
 
-Game::Game(Board b): board {b} {}
+Game::Game() {}
 
 //board must be redrawn both in text and graphically, each time a move command is issued
 void Game::processCommand(const std::string& command) {

@@ -11,6 +11,7 @@ class TextDisplay: public Observer {
     TextDisplay();
     ~TextDisplay();
 
+    void addPiece(int x, int y, char piece);
     void notify(Square &s) override;
 
     friend std::ostream &operator<<(std::ostream &out, const TextDisplay &td);

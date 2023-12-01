@@ -31,9 +31,10 @@ class Game {
     void endGame();
 
 public:
-    Game(Board b);
+    Game();
 
     void processCommand(const std::string& command);
     float getWScore();
     float getBScore();
+    friend std::ostream &operator<<(std::ostream &out, const Board &b);
 };

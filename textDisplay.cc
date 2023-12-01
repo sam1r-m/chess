@@ -1,10 +1,46 @@
 #include <iostream>
 #include "textDisplay.h"
 
-
+void TextDisplay::addPiece(int x, int y, char piece){
+    theDisplay[y][x] = piece;
+}
 
 TextDisplay::TextDisplay(){
+    std::vector<char> row = {' ', '_', ' ', '_', ' ', '_', ' ', '_'};
+    std::vector<char> row1 = {'_', ' ', '_', ' ', '_', ' ', '_', ' '};
 
+    //initialize black pieces
+    addPiece(0, 0, 'r');
+    addPiece(1, 0, 'n');
+    addPiece(2, 0, 'b');
+    addPiece(3, 0, 'q');
+    addPiece(4, 0, 'k');
+    addPiece(5, 0, 'b');
+    addPiece(6, 0, 'n');
+    addPiece(7, 0, 'r');
+
+    for (int i = 0; i < boardSize; ++i) {
+        addPiece(i, 1, 'p');
+    }
+
+    theDisplay.emplace_back(row);
+    theDisplay.emplace_back(row1);
+    theDisplay.emplace_back(row);
+    theDisplay.emplace_back(row1);
+
+    //initialize white pieces
+    for (int j = 0; j < boardSize; ++j) {
+        addPiece(j, 6, 'P');
+    }
+
+    addPiece(0, 7, 'R');
+    addPiece(1, 7, 'N');
+    addPiece(2, 7, 'B');
+    addPiece(3, 7, 'Q');
+    addPiece(4, 7, 'K');
+    addPiece(5, 7, 'B');
+    addPiece(6, 7, 'N');
+    addPiece(7, 7, 'R');
 }
 
 TextDisplay::~TextDisplay(){}

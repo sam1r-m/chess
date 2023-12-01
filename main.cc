@@ -5,8 +5,7 @@
 using namespace std;
 
 int main() {
-    Board b;
-    Game g(b);
+    Game g;
     string command;
 
     while (getline(cin, command)) {
