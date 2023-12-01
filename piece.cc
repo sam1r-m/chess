@@ -32,10 +32,10 @@ void Piece::setY(int posY) {
 
 // isValidMove is pure virtual. Will be implemented in derived classes.
 
-void Piece::setBoard(const Board& b) {
-    boardPtr = &b;
-}
+// void Piece::setBoard(const Board& b) {
+//     boardPtr = &b;
+// }
 
-const Board* Piece::getBoard() const {
-    return boardPtr;
-}
+// const Board* Piece::getBoard() const {
+//     return boardPtr;
+// }

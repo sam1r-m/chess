@@ -2,15 +2,18 @@
 #define __PIECE_H__
 
 #include <iostream>
-#include "board.h"
+#include <vector>
+// #include "board.h"
 #include "move.h"
+
+enum class Color { WHITE, BLACK };
 
 class Piece {
 protected:
     Color color;
     int x;
     int y;
-    const Board* boardPtr;
+    // const Board* boardPtr;
 public:
     Piece(Color color, int posX, int posY);
     virtual ~Piece();
@@ -27,8 +30,8 @@ public:
     virtual char getChar() const = 0;
     
     // setBoard and getBoard added
-    void setBoard(const Board& b);
-    const Board* getBoard() const;
+    // void setBoard(const Board& b);
+    // const Board* getBoard() const;
     // end of setBoard and getBoard
 
     // Pure virtual function generateMoves() added

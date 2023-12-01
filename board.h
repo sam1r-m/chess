@@ -11,7 +11,6 @@
 #include <memory>
 #include <iostream>
 
-enum class Color { WHITE, BLACK };
 class Piece;
 
 class Board {
