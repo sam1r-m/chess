@@ -15,7 +15,7 @@ class Piece;
 
 class Board {
     std::vector<std::vector<Square>> board; // 2D array of Squares
-    std::vector<std::unique_ptr<Piece>> pieces; // All the pieces on the board (maybe make it shared ptr?)
+    std::vector<std::unique_ptr<Piece>> pieces; // All the pieces on the board 
     const int boardSize = 8;
     std::unique_ptr<TextDisplay> td;
 

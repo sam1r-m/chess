@@ -25,6 +25,8 @@ Board::Board(){
 
 }
 
+Board::~Board() {}
+
 void Board::addPieceAt(int x, int y, std::unique_ptr<Piece> piece){
     pieces.emplace_back(std::move(piece));
     changeCoords(&x, &y);

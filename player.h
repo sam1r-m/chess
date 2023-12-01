@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "move.h"
+#include "board.h"
 
 class Player {
     Color playerColor;
