@@ -1,5 +1,5 @@
 #include "board.h"
-
+using namespace std;
 // changeCoords(x, y) converts given x and y 
 //  coordinates into their corresponding array indices
 void changeCoords(int *x, int *y){
@@ -42,4 +42,15 @@ bool Board::makeMove(int fromX, int fromY, int toX, int toY){
     changeCoords(&toX, &toY);
 
 
+}
+
+// added getSquareAt
+const Square& Board::getSquareAt(int x, int y) const {
+    return board[x][y];
+}
+
+// added getBoard()
+
+const vector<vector<Square>>& Board::getBoard() const {
+    return board;
 }

@@ -34,7 +34,9 @@ class Board: public Subject {
     bool isCheck(Color color) const;
     bool isCheckmate(Color color) const;
     bool isStalemate(Color color) const; 
-
+    // added getSquareAt(int x, int y) and getBoard() method which returns board
+    const Square& getSquareAt(int x, int y) const;
+    const std::vector<std::vector<Square>>& getBoard() const;
     void addPieceAt(int x, int y, std::unique_ptr<Piece> piece);
     void removePieceAt(int x, int y);
 
