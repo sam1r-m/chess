@@ -8,7 +8,7 @@
 class Square {
     const int xPos;
     const int yPos;
-    Piece *piece; // could use a smart pointer here to share ownership with Piece -> shared_ptr<Piece> piece;
+    Piece *piece;
 
     public:
     Square(int xPos, int yPos); // (xPos, yPos) -> Square Coordinates

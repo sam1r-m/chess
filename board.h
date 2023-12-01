@@ -3,7 +3,6 @@
 #define __BOARD_H__
 
 #include "square.h"
-#include "subject.h"
 #include "textDisplay.h"
 #include "piece.h"
 
@@ -15,7 +14,7 @@
 enum class Color { WHITE, BLACK };
 class Piece;
 
-class Board: public Subject {
+class Board {
     std::vector<std::vector<Square>> board; // 2D array of Squares
     std::vector<std::unique_ptr<Piece>> pieces; // All the pieces on the board (maybe make it shared ptr?)
     const int boardSize = 8;
