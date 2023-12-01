@@ -15,11 +15,16 @@ void Game::processCommand(const std::string& command) {
     if (!gameMode && !setUpMode){
 
         if (cmd == "game"){
-            gameMode = true;
             std::string wp, bp;
             iss >> wp >> bp;
-            startGame(wp, bp);
-            std::cout << board;
+
+            if (startGame(wp, bp)){
+                gameMode = true;
+                std::cout << board;
+            } else {
+                std::cout << "Invalid player type." << std::endl;
+            }
+
             return;
 
         } else if (cmd == "setup") {
@@ -65,6 +70,7 @@ void Game::processCommand(const std::string& command) {
                 whiteScore += 0.5;
                 blackScore += 0.5;
                 cout << "Stalemate!" << endl;
+                gameMode = false;
 
             } else if (check) {
                 blackTurn = !blackTurn;
@@ -144,7 +150,7 @@ vector<int> Game::convert(std::string val) {
     return cooordinate;
 }
 
-void Game::startGame(std::string wp, std::string bp){
+bool Game::startGame(std::string wp, std::string bp){
     bool validPlayer = true;
 
     //set type of whitePlayer
@@ -163,8 +169,7 @@ void Game::startGame(std::string wp, std::string bp){
     else if (bp == "computer[4]") whitePlayer = std::make_unique<Computer4>();
     else validPlayer = false;
 
-    if (validPlayer) gameMode = true;
-    else std::cout << "Invalid player type." << std::endl;
+    return validPlayer;
 }
 
 void Game::addPiece(string pieceType, string posn) {
