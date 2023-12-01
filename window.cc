@@ -1,5 +1,4 @@
-#include <X11/Xlib.h>
-#include <X11/Xutil.h>
+//#include <X11/Xutil.h>
 #include <iostream>
 #include <cstdlib>
 #include <string>
@@ -43,11 +42,11 @@ Xwindow::Xwindow(int width, int height) {
   XSetForeground(d,gc,colours[Black]);
 
   // Make window non-resizeable.
-  XSizeHints hints;
-  hints.flags = (USPosition | PSize | PMinSize | PMaxSize );
-  hints.height = hints.base_height = hints.min_height = hints.max_height = height;
-  hints.width = hints.base_width = hints.min_width = hints.max_width = width;
-  XSetNormalHints(d, w, &hints);
+  // XSizeHints hints;
+  // hints.flags = (USPosition | PSize | PMinSize | PMaxSize );
+  // hints.height = hints.base_height = hints.min_height = hints.max_height = height;
+  // hints.width = hints.base_width = hints.min_width = hints.max_width = width;
+  // XSetNormalHints(d, w, &hints);
 
   XSynchronize(d,True);
 

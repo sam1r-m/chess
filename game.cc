@@ -181,7 +181,7 @@ void Game::addPiece(string pieceType, string posn) {
         newPiece = std::make_unique<Rook>(Color::BLACK, x, y);
         board.addPieceAt(x, y, std::move(newPiece));
     }
-    else if (pieceType == "b") {
+    else if (pieceType == "") {
         newPiece = std::make_unique<Bishop>(Color::BLACK, x, y);
         board.addPieceAt(x, y, std::move(newPiece));
     }
