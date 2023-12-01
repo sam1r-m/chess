@@ -4,11 +4,13 @@
 #include <vector>
 #include <iostream>
 #include "piece.h"
+#include "observer.h"
 
 class Square {
     const int xPos;
     const int yPos;
     Piece *piece;
+    std::vector<Observer*> observers;
 
     public:
     Square(int xPos, int yPos); // (xPos, yPos) -> Square Coordinates
@@ -18,7 +20,10 @@ class Square {
     int getY();
     Piece *getPiece();
     bool isOccupied();
-    friend std::ostream &operator<<(std::ostream &out, Square &square);
+
+    void attach(Observer *o);
+    void notifyObservers();
+    friend std::ostream &operator<<(std::ostream &out, Square &square); //might not be necessary
 };
 
 #endif

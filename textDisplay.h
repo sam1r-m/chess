@@ -1,7 +1,10 @@
 // View
 #ifndef __TEXTDISPLAY_H__
 #define __TEXTDISPLAY_H__
+#include <vector>
+#include <iostream>
 #include "observer.h"
+class Square;
 
 class TextDisplay: public Observer {
     std::vector<std::vector<char>> theDisplay;

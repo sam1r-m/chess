@@ -1,1 +1,1 @@
-square.o: square.cc square.h piece.h move.h
+square.o: square.cc square.h piece.h move.h observer.h

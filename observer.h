@@ -1,6 +1,6 @@
 #ifndef __OBSERVER_H__
 #define __OBSERVER_H__
-#include "square.h"
+class Square;
 
 class Observer {
 public:

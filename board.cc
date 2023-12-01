@@ -21,6 +21,13 @@ Board::Board(){
         board.emplace_back(row);
     }
 
+    for (int k = 0; k < boardSize; ++k){
+        for (int l = 0; l < boardSize; ++l){
+            board[k][l].attach(td.get());
+            //attach graphicsDisplay
+        }
+    }
+
     // set up pieces in starting postitions
 
 }
@@ -35,9 +42,16 @@ void Board::addPieceAt(int x, int y, std::unique_ptr<Piece> piece){
 }
 
 void Board::removePieceAt(int x, int y){
+    bool found = false;
+
     for (int i = 0; i < pieces.size(); ++i){
-	    
+	    if (x == pieces[i].get()->getX() && y == pieces[i].get()->getY()){
+            pieces[i] == nullptr;
+            found = true;
+        }
     } 
+
+    if (!found) return;
 
     changeCoords(&x, &y);
     

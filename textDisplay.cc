@@ -1,5 +1,6 @@
 #include <iostream>
 #include "textDisplay.h"
+#include "square.h"
 
 void TextDisplay::addPiece(int x, int y, char piece){
     theDisplay[y][x] = piece;
