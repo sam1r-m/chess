@@ -103,6 +103,7 @@ void Game::processCommand(const std::string& command) {
         std::string wp, bp;
         iss >> wp >> bp;
         startGame(wp, bp);
+        std::cout << board;
 
     } else if (cmd == "setup") {
         setUpMode = true;

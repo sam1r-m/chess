@@ -5,8 +5,6 @@
 #include "board.h"
 #include "move.h"
 
-enum class Color { WHITE, BLACK };
-
 class Piece {
 protected:
     Color color;
