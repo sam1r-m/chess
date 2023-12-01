@@ -1,5 +1,6 @@
 #ifndef __KING_H__
 #define __KING_H__
+#include <vector>
 #include "piece.h"
 
 class King: public Piece{
@@ -11,6 +12,7 @@ public:
 
     bool isValidMove(int toX, int toY) const override;
     char getChar() const override;
+    std::vector<Move> generateMoves() const override;
 };
 
 #endif

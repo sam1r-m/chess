@@ -15,3 +15,7 @@ char Pawn::getChar() const{
     if (getColor() == Color::BLACK) return 'p';
     else return 'P';
 }
+
+std::vector<Move> Pawn::generateMoves() const{
+    
+}

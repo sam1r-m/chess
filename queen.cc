@@ -15,3 +15,7 @@ char Queen::getChar() const{
     if (getColor() == Color::BLACK) return 'q';
     else return 'Q';
 }
+
+std::vector<Move> Queen::generateMoves() const{
+    
+}

@@ -1,5 +1,6 @@
 #ifndef __KNIGHT_H__
 #define __KNIGHT_H__
+#include <vector>
 #include "piece.h"
 // #include "board.h"
 
@@ -11,6 +12,7 @@ public:
 
     bool isValidMove(int toX, int toY) const override;
     char getChar() const override;
+    std::vector<Move> generateMoves() const override;
 };
 
 #endif

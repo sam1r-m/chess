@@ -15,3 +15,7 @@ char King::getChar() const{
     if (getColor() == Color::BLACK) return 'k';
     else return 'K';
 }
+
+std::vector<Move> King::generateMoves() const{
+    
+}

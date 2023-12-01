@@ -15,3 +15,7 @@ char Bishop::getChar() const{
     if (getColor() == Color::BLACK) return 'b';
     else return 'B';
 }
+
+std::vector<Move> Bishop::generateMoves() const{
+    
+}

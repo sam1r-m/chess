@@ -1,5 +1,6 @@
 #ifndef __QUEEN_H__
 #define __QUEEN_H__
+#include <vector>
 #include "piece.h"
 
 class Queen: public Piece{
@@ -10,6 +11,7 @@ public:
 
     bool isValidMove(int toX, int toY) const override;
     char getChar() const override;
+    std::vector<Move> generateMoves() const override;
 };
 
 #endif

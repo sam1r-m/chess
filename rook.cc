@@ -15,3 +15,7 @@ char Rook::getChar() const{
     if (getColor() == Color::BLACK) return 'r';
     else return 'R';
 }
+
+std::vector<Move> Rook::generateMoves() const{
+    
+}

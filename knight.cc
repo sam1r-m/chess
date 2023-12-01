@@ -42,3 +42,7 @@ char Knight::getChar() const{
     if (getColor() == Color::BLACK) return 'n';
     else return 'N';
 }
+
+std::vector<Move> Knight::generateMoves() const{
+    
+}
