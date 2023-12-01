@@ -7,7 +7,7 @@ Knight::~Knight(){
 
 }
 
-// bool Knight::isValidMove(int toX, int toY) const{
+bool Knight::isValidMove(int toX, int toY) const{
 //     int deltaX = toX - getX(); // change in x
 //     int deltaY = toY - getY(); // change in y
 //     // L shape: so change in x is 2 y is 1 or change in x is 1 y is 2
@@ -36,7 +36,7 @@ Knight::~Knight(){
 //         }
 //     }
 //     return correct;
-// }
+}
 
 char Knight::getChar() const{
     if (getColor() == Color::BLACK) return 'n';
