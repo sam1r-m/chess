@@ -7,7 +7,7 @@ Queen::~Queen(){
 
 }
 
-bool Queen::isValidMove(int toX, int toY) const{
+bool Queen::isValidMove(int toX, int toY, Board *board) const{
 
 }
 

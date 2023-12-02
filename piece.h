@@ -27,7 +27,7 @@ public:
     void setX(int posX);
     void setY(int posY);
 
-    virtual bool isValidMove(int toX, int toY) const = 0;
+    virtual bool isValidMove(int toX, int toY, Board *board) const = 0;
     virtual char getChar() const = 0;
     
     // setBoard and getBoard added

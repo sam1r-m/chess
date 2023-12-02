@@ -7,7 +7,7 @@ Rook::~Rook(){
 
 }
 
-bool Rook::isValidMove(int toX, int toY) const{
+bool Rook::isValidMove(int toX, int toY, Board *board) const{
 
 }
 

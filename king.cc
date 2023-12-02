@@ -7,7 +7,7 @@ King::~King(){
 
 }
 
-bool King::isValidMove(int toX, int toY) const{
+bool King::isValidMove(int toX, int toY, Board *board) const{
 
 }
 

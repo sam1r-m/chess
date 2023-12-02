@@ -7,7 +7,7 @@ Bishop::~Bishop(){
 
 }
 
-bool Bishop::isValidMove(int toX, int toY) const{
+bool Bishop::isValidMove(int toX, int toY, Board *board) const{
 
 }
 

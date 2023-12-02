@@ -9,7 +9,7 @@ public:
     Bishop(Color col, int posX, int posY);
     ~Bishop();
 
-    bool isValidMove(int toX, int toY) const override;
+    bool isValidMove(int toX, int toY, Board *board) const override;
     char getChar() const override;
     std::vector<Move> generateMoves(Board *board) const override;
 };

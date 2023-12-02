@@ -10,7 +10,7 @@ public:
     Knight(Color col, int posX, int posY);
     ~Knight();
 
-    bool isValidMove(int toX, int toY) const override;
+    bool isValidMove(int toX, int toY, Board *board) const override;
     char getChar() const override;
     std::vector<Move> generateMoves(Board *board) const override;
 };
