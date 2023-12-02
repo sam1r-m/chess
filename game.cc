@@ -124,7 +124,6 @@ void Game::processCommand(const std::string& command) {
             if (validCoords(x, y)){
                 board.removePieceAt(x,y);
                 std::cout << board;
-
             } else {
                 std::cout << "Invalid coordinates." << std::endl;
             }
