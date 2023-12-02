@@ -7,7 +7,9 @@ bool validCoords(int x, int y) {
     return (1 <= x) && (x <= 8) && (1 <= y) && (y <= 8);
 }
 
-Game::Game() {}
+Game::Game() {
+    board.initializeBoard();
+}
 
 //board must be redrawn both in text and graphically, each time a move command is issued
 void Game::processCommand(const std::string& command) {
@@ -271,6 +273,20 @@ void Game::changeTurn(std::string color){
     else std::cout << "Invalid color." << std::endl;
 }
 
+bool Game::validSetup(){
+    bool valid = true;
+    int WKingCount, BKingCount;
+
+    //check for number of Kings
+    for (int i = 0; i < 8; ++i){
+        for (int j = 0; j < 8; ++j){
+            
+
+
+        }
+    }
+}
+
 void Game::endGame(){
     if (blackTurn){
         whiteScore++;
@@ -280,5 +296,7 @@ void Game::endGame(){
         cout << "Black wins!" << endl;
     }
 
+    board.resetBoard();
+    board.initializeBoard();
     gameMode = false;
 }

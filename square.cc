@@ -21,6 +21,22 @@ bool Square::isOccupied(){
     return piece;
 }
 
+void Square::addPiece(Piece *p){
+    piece = p;
+}
+
+void Square::attach(Observer *o) {observers.emplace_back(o);}
+
+void Square::detachObservers() {
+    observers.clear();
+}
+
+void Square::notifyObservers(){
+    for (int i = 0; i < observers.size(); ++i){
+	    observers[i]->notify(*this);
+    } 
+}
+
 std::ostream &operator<<(std::ostream &out, Square &square){
 
     //if square has piece, print the piece's signature
