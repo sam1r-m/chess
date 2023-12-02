@@ -57,7 +57,7 @@ void Game::processCommand(const std::string& command) {
             std::string start, end;
             iss >> start >> end;
 
-            //different for computer, pawn promotion takes 
+            //different for computer (no coordinates), pawn promotion takes 
             //  in additional argument
             vector<int> from_coordinate = convert(start);
             vector<int> to_coordinate = convert(end);
@@ -67,15 +67,24 @@ void Game::processCommand(const std::string& command) {
             int toY = to_coordinate[1];
 
             if (validCoords(fromX, fromY) && validCoords(toX, toY)){
-                board.makeMove(fromX, fromY, toX, toY);
+                
+                if (blackTurn){
+                    blackPlayer.get()->generateAllMoves();
+                    blackPlayer.get()->makeMove();
+                } else {
+                    whitePlayer.get()->generateAllMoves();
+                    whitePlayer.get()->makeMove();
+                }
+
             } else {
                 std::cout << "Invalid coordinates." << std::endl;
                 return;
             }
 
+            blackTurn = !blackTurn;
+
             if (checkmate) {
                 cout << "Checkmate! ";
-                blackTurn = !blackTurn;
                 endGame();
 
             } else if (staleMate) {
@@ -85,7 +94,6 @@ void Game::processCommand(const std::string& command) {
                 gameMode = false;
 
             } else if (check) {
-                blackTurn = !blackTurn;
 
                 if (blackTurn) {
                     cout << "Black";
@@ -350,4 +358,8 @@ void Game::endGame(){
     board.resetBoard();
     board.initializeBoard();
     gameMode = false;
+    bool blackTurn = false; 
+    bool checkmate = false; 
+    bool staleMate = false;
+    bool check = false;
 }
