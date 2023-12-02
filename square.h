@@ -21,6 +21,7 @@ class Square {
     Piece *getPiece();
     bool isOccupied();
 
+    void addPiece(Piece *p);
     void attach(Observer *o);
     void notifyObservers();
     friend std::ostream &operator<<(std::ostream &out, Square &square); //might not be necessary

@@ -48,7 +48,21 @@ TextDisplay::TextDisplay(){
 TextDisplay::~TextDisplay(){}
 
 void TextDisplay::notify(Square &s){
+    int x = s.getX() - 1;
+    int y = boardSize - s.getY();
 
+    //if there's Piece on Square s, update to Piece char
+    if (s.isOccupied()){
+        theDisplay[y][x] = s.getPiece()->getChar();
+
+    //if no Piece, update to corresponding Square char
+    } else {
+        if ((x + y) % 2){
+            theDisplay[y][x] = '_';
+        } else {
+            theDisplay[y][x] = ' ';
+        }
+    }
 }
 
 std::ostream &operator<<(std::ostream &out, const TextDisplay &td){

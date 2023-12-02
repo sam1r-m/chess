@@ -21,6 +21,10 @@ bool Square::isOccupied(){
     return piece;
 }
 
+void Square::addPiece(Piece *p){
+    piece = p;
+}
+
 void Square::attach(Observer *o) {observers.emplace_back(o);}
 
 void Square::notifyObservers(){

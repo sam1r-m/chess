@@ -21,6 +21,66 @@ Board::Board(){
         board.emplace_back(row);
     }
 
+    //add Black Pieces
+    std::unique_ptr<Rook> BRook1 = std::make_unique<Rook>(Color::BLACK, 1, 8);
+    addPieceAt(1, 8, std::move(BRook1));
+
+    std::unique_ptr<Knight> BKnight1 = std::make_unique<Knight>(Color::BLACK, 2, 8);
+    addPieceAt(2, 8, std::move(BKnight1));
+
+    std::unique_ptr<Bishop> BBishop1 = std::make_unique<Bishop>(Color::BLACK, 3, 8);
+    addPieceAt(3, 8, std::move(BBishop1));
+
+    std::unique_ptr<Queen> BQueen = std::make_unique<Queen>(Color::BLACK, 4, 8);
+    addPieceAt(4, 8, std::move(BQueen));
+
+    std::unique_ptr<King> BKing = std::make_unique<King>(Color::BLACK, 5, 8);
+    addPieceAt(5, 8, std::move(BKing));
+
+    std::unique_ptr<Bishop> BBishop2 = std::make_unique<Bishop>(Color::BLACK, 6, 8);
+    addPieceAt(6, 8, std::move(BBishop2));
+
+    std::unique_ptr<Knight> BKnight2 = std::make_unique<Knight>(Color::BLACK, 7, 8);
+    addPieceAt(7, 8, std::move(BKnight2));
+
+    std::unique_ptr<Rook> BRook2 = std::make_unique<Rook>(Color::BLACK, 8, 8);
+    addPieceAt(8, 8, std::move(BRook2));
+
+    for (int k = 1; k <= boardSize; ++k){
+        std::unique_ptr<Pawn> BPawn = std::make_unique<Pawn>(Color::BLACK, k, 7);
+        addPieceAt(k, 7, std::move(BPawn));
+    }
+
+    //add White Pieces
+    for (int l = 1; l <= boardSize; ++l){
+        std::unique_ptr<Pawn> WPawn = std::make_unique<Pawn>(Color::WHITE, l, 2);
+        addPieceAt(l, 2, std::move(WPawn));
+    }
+
+    std::unique_ptr<Rook> WRook1 = std::make_unique<Rook>(Color::WHITE, 1, 1);
+    addPieceAt(1, 1, std::move(WRook1));
+
+    std::unique_ptr<Knight> WKnight1 = std::make_unique<Knight>(Color::WHITE, 2, 1);
+    addPieceAt(2, 1, std::move(WKnight1));
+
+    std::unique_ptr<Bishop> WBishop1 = std::make_unique<Bishop>(Color::WHITE, 3, 1);
+    addPieceAt(3, 1, std::move(WBishop1));
+
+    std::unique_ptr<Queen> WQueen = std::make_unique<Queen>(Color::WHITE, 4, 1);
+    addPieceAt(4, 1, std::move(WQueen));
+
+    std::unique_ptr<King> WKing = std::make_unique<King>(Color::WHITE, 5, 1);
+    addPieceAt(5, 1, std::move(WKing));
+
+    std::unique_ptr<Bishop> WBishop2 = std::make_unique<Bishop>(Color::WHITE, 6, 1);
+    addPieceAt(6, 1, std::move(WBishop2));
+
+    std::unique_ptr<Knight> WKnight2 = std::make_unique<Knight>(Color::WHITE, 7, 1);
+    addPieceAt(7, 1, std::move(WKnight2));
+
+    std::unique_ptr<Rook> WRook2 = std::make_unique<Rook>(Color::WHITE, 8, 1);
+    addPieceAt(8, 1, std::move(WRook2));
+
     for (int k = 0; k < boardSize; ++k){
         for (int l = 0; l < boardSize; ++l){
             board[k][l].attach(td.get());
@@ -35,26 +95,36 @@ Board::Board(){
 Board::~Board() {}
 
 void Board::addPieceAt(int x, int y, std::unique_ptr<Piece> piece){
-    pieces.emplace_back(std::move(piece));
     changeCoords(&x, &y);
     
-    
+    //if there is a Piece currently on the Square, remove it
+    if (board[y][x].isOccupied()){
+        removePieceAt(x + 1, 8 - y);
+    }
+
+    pieces.emplace_back(std::move(piece));
+    board[y][x].addPiece(pieces[pieces.size() - 1].get());
+    board[y][x].notifyObservers();
 }
 
 void Board::removePieceAt(int x, int y){
     bool found = false;
 
-    for (int i = 0; i < pieces.size(); ++i){
-	    if (x == pieces[i].get()->getX() && y == pieces[i].get()->getY()){
-            pieces[i] == nullptr;
+    for (auto it = pieces.begin(); it != pieces.end(); ++it) {
+        if (x == it->get()->getX() && y == it->get()->getY()) {
+            pieces.erase(it);
+            changeCoords(&x, &y);
+            board[y][x].addPiece(nullptr);
             found = true;
+            break;
         }
-    } 
+    }
 
-    if (!found) return;
+    if (!found) {
+        return;
+    }
 
-    changeCoords(&x, &y);
-    
+    board[y][x].notifyObservers();
 }
 
 bool Board::makeMove(int fromX, int fromY, int toX, int toY){

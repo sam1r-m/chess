@@ -5,6 +5,12 @@
 #include "square.h"
 #include "textDisplay.h"
 #include "piece.h"
+#include "pawn.h"
+#include "rook.h"
+#include "knight.h"
+#include "bishop.h"
+#include "queen.h"
+#include "king.h"
 
 #include <vector>
 #include <string>
