@@ -8,7 +8,7 @@ Pawn::~Pawn(){
 }
 
 bool Pawn::isValidMove(int toX, int toY, Board *board) const{
-
+    
 }
 
 char Pawn::getChar() const{

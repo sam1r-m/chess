@@ -28,7 +28,7 @@ void Game::processCommand(const std::string& command) {
                 gameMode = true;
                 std::cout << board;
             } else {
-                std::cout << "Invalid player type." << std::endl;
+                std::cout << "Invalid player type. Expected: game (human/computer[1/2/3/4]) (human/computer[1/2/3/4])" << std::endl;
             }
 
             return;
@@ -92,7 +92,7 @@ void Game::processCommand(const std::string& command) {
                     }
 
                 } else {
-                    std::cout << "Invalid coordinates." << std::endl;
+                    std::cout << "Invalid coordinates. Expected: move (a-h)(1-8) (a-h)(1-8)" << std::endl;
                     return;
                 }
             }
@@ -149,7 +149,7 @@ void Game::processCommand(const std::string& command) {
                 board.removePieceAt(x,y);
                 std::cout << board;
             } else {
-                std::cout << "Invalid coordinates." << std::endl;
+                std::cout << "Invalid coordinates. Expected: - (a-h)(1-8)" << std::endl;
             }
 
         } else if (cmd == "=") {
@@ -225,7 +225,7 @@ void Game::addPiece(string pieceType, string posn) {
     int x = coordinate[0];
     int y = coordinate[1];
     if (!validCoords(x, y)){
-        std::cout << "Invalid coordinates." << std::endl;
+        std::cout << "Invalid coordinates. Expected: + " << pieceType << " (a-h)(1-8)" << std::endl;
         return;
     }
 
@@ -283,7 +283,7 @@ void Game::addPiece(string pieceType, string posn) {
         board.addPieceAt(x, y, std::move(newPiece));
     }
     else {
-        cout << "Invalid piece type" << endl;
+        cout << pieceType << " is an invalid Piece type." << endl;
         return;
     }
     std::cout << board;
@@ -298,7 +298,7 @@ void Game::changeTurn(std::string color){
         std::cout << "White's turn." << std::endl;
         blackTurn = false;
     }
-    else std::cout << "Invalid color." << std::endl;
+    else std::cout << "Invalid color. Expected: = (black/white)" << std::endl;
 }
 
 bool Game::validSetup(){
