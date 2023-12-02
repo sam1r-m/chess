@@ -53,32 +53,48 @@ void Game::processCommand(const std::string& command) {
         if (cmd == "resign"){
             endGame();
 
+        //different for computer (no coordinates), pawn promotion takes 
+        //  in additional argument
         } else if (cmd == "move") {
-            std::string start, end;
-            iss >> start >> end;
 
-            //different for computer (no coordinates), pawn promotion takes 
-            //  in additional argument
-            vector<int> from_coordinate = convert(start);
-            vector<int> to_coordinate = convert(end);
-            int fromX = from_coordinate[0];
-            int fromY = from_coordinate[1];
-            int toX = to_coordinate[0];
-            int toY = to_coordinate[1];
+            //if current Player is a Computer, only need "move" command
 
-            if (validCoords(fromX, fromY) && validCoords(toX, toY)){
-                
-                if (blackTurn){
-                    blackPlayer.get()->generateAllMoves();
-                    blackPlayer.get()->makeMove();
-                } else {
-                    whitePlayer.get()->generateAllMoves();
-                    whitePlayer.get()->makeMove();
-                }
+            if (!(blackPlayer.get()->isHuman()) && blackTurn){
+                // blackPlayer.get()->generateAllMoves();
+                // blackPlayer.get()->makeMove();
 
+            } else if (!(whitePlayer.get()->isHuman()) && !blackTurn){
+                // whitePlayer.get()->generateAllMoves();
+                // whitePlayer.get()->makeMove();
+
+            //if current Player is a Human, require start and end
+            //  coordinates as part of input
             } else {
-                std::cout << "Invalid coordinates." << std::endl;
-                return;
+
+                std::string start, end;
+                iss >> start >> end;
+                
+                vector<int> from_coordinate = convert(start);
+                vector<int> to_coordinate = convert(end);
+                int fromX = from_coordinate[0];
+                int fromY = from_coordinate[1];
+                int toX = to_coordinate[0];
+                int toY = to_coordinate[1];
+
+                if (validCoords(fromX, fromY) && validCoords(toX, toY)){
+                    
+                    if (blackTurn){
+                        // blackPlayer.get()->generateAllMoves();
+                        // blackPlayer.get()->makeMove();
+                    } else {
+                        // whitePlayer.get()->generateAllMoves();
+                        // whitePlayer.get()->makeMove();
+                    }
+
+                } else {
+                    std::cout << "Invalid coordinates." << std::endl;
+                    return;
+                }
             }
 
             blackTurn = !blackTurn;
