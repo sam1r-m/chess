@@ -3,6 +3,10 @@
 #include <string>
 using namespace std;
 
+bool validCoords(int x, int y) {
+    return (1 <= x) && (x <= 8) && (1 <= y) && (y <= 8);
+}
+
 Game::Game() {}
 
 //board must be redrawn both in text and graphically, each time a move command is issued
@@ -10,6 +14,34 @@ void Game::processCommand(const std::string& command) {
     std::istringstream iss(command);
     std::string cmd;
     iss >> cmd;
+
+    // first command must be game or setup
+    if (!gameMode && !setUpMode){
+
+        if (cmd == "game"){
+            std::string wp, bp;
+            iss >> wp >> bp;
+
+            if (startGame(wp, bp)){
+                gameMode = true;
+                std::cout << board;
+            } else {
+                std::cout << "Invalid player type." << std::endl;
+            }
+
+            return;
+
+        } else if (cmd == "setup") {
+            setUpMode = true;
+            std::cout << board;
+            return;
+
+        } else {
+            std::cout << "Invalid command." << std::endl;
+
+        }
+
+    }
 
     // check if Game is in gameMode, only accepts resign
     //  or move commands
@@ -31,7 +63,13 @@ void Game::processCommand(const std::string& command) {
             int fromY = from_coordinate[1];
             int toX = to_coordinate[0];
             int toY = to_coordinate[1];
-            board.makeMove(fromX, fromY, toX, toY);
+
+            if (validCoords(fromX, fromY) && validCoords(toX, toY)){
+                board.makeMove(fromX, fromY, toX, toY);
+            } else {
+                std::cout << "Invalid coordinates." << std::endl;
+                return;
+            }
 
             if (checkmate) {
                 cout << "Checkmate! ";
@@ -42,6 +80,7 @@ void Game::processCommand(const std::string& command) {
                 whiteScore += 0.5;
                 blackScore += 0.5;
                 cout << "Stalemate!" << endl;
+                gameMode = false;
 
             } else if (check) {
                 blackTurn = !blackTurn;
@@ -55,6 +94,8 @@ void Game::processCommand(const std::string& command) {
 
             }
 
+            std::cout << board;
+
         } else {
             std::cout << "Invalid command." << std::endl;
         }
@@ -63,7 +104,7 @@ void Game::processCommand(const std::string& command) {
 
     // check if Game is in setUpMode, only accepts +, -, =, 
     //  and done commands
-    if (setUpMode){
+    if (setUpMode) {
         
         if (cmd == "+") {
             std::string pieceType, posn;
@@ -77,7 +118,13 @@ void Game::processCommand(const std::string& command) {
             vector<int> coordinates = convert(posn);
             int x = coordinates[0];
             int y = coordinates[1];
-            board.removePieceAt(x,y);
+
+            if (validCoords(x, y)){
+                board.removePieceAt(x,y);
+                std::cout << board;
+            } else {
+                std::cout << "Invalid coordinates." << std::endl;
+            }
 
         } else if (cmd == "=") {
             std::string color;
@@ -87,7 +134,8 @@ void Game::processCommand(const std::string& command) {
         } else if (cmd == "done") {
 
             //check that there is one king on either side, no pawns are on the
-            //  first or last row, and that neitehr king is in check before leaving
+            //  first or last row, and that neither king is in check before leaving
+            std::cout << board;
             setUpMode = false;
 
         } else {
@@ -97,21 +145,6 @@ void Game::processCommand(const std::string& command) {
 
     }
 
-    // first command must be game or setup
-    if (cmd == "game"){
-        gameMode = true;
-        std::string wp, bp;
-        iss >> wp >> bp;
-        startGame(wp, bp);
-        std::cout << board;
-
-    } else if (cmd == "setup") {
-        setUpMode = true;
-
-    } else {
-        std::cout << "Invalid command." << std::endl;
-
-    }
 }
 
 float Game::getWScore(){
@@ -135,7 +168,7 @@ vector<int> Game::convert(std::string val) {
     return cooordinate;
 }
 
-void Game::startGame(std::string wp, std::string bp){
+bool Game::startGame(std::string wp, std::string bp){
     bool validPlayer = true;
 
     //set type of whitePlayer
@@ -154,14 +187,18 @@ void Game::startGame(std::string wp, std::string bp){
     else if (bp == "computer[4]") whitePlayer = std::make_unique<Computer4>();
     else validPlayer = false;
 
-    if (validPlayer) gameMode = true;
-    else std::cout << "Invalid player type." << std::endl;
+    return validPlayer;
 }
 
 void Game::addPiece(string pieceType, string posn) {
     vector<int> coordinate = convert(posn);
     int x = coordinate[0];
     int y = coordinate[1];
+    if (!validCoords(x, y)){
+        std::cout << "Invalid coordinates." << std::endl;
+        return;
+    }
+
     std::unique_ptr<Piece> newPiece;
     
     //black pieces (lowercase)
@@ -181,7 +218,7 @@ void Game::addPiece(string pieceType, string posn) {
         newPiece = std::make_unique<Rook>(Color::BLACK, x, y);
         board.addPieceAt(x, y, std::move(newPiece));
     }
-    else if (pieceType == "") {
+    else if (pieceType == "b") {
         newPiece = std::make_unique<Bishop>(Color::BLACK, x, y);
         board.addPieceAt(x, y, std::move(newPiece));
     }
@@ -217,12 +254,20 @@ void Game::addPiece(string pieceType, string posn) {
     }
     else {
         cout << "Invalid piece type" << endl;
+        return;
     }
+    std::cout << board;
 }
 
 void Game::changeTurn(std::string color){
-    if (color == "black") blackTurn = true;
-    else if (color == "white") blackTurn = false;
+    if (color == "black") {
+        std::cout << "Black's turn." << std::endl;
+        blackTurn = true;
+    } 
+    else if (color == "white") {
+        std::cout << "White's turn." << std::endl;
+        blackTurn = false;
+    }
     else std::cout << "Invalid color." << std::endl;
 }
 
