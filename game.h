@@ -36,6 +36,7 @@ class Game {
     bool startGame(std::string wp, std::string bp);
     void addPiece(std::string pieceType, std::string posn);
     void changeTurn(std::string color);
+    bool validSetup();
     void endGame();
 
 public:

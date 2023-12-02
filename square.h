@@ -23,6 +23,7 @@ class Square {
 
     void addPiece(Piece *p);
     void attach(Observer *o);
+    void detachObservers();
     void notifyObservers();
     friend std::ostream &operator<<(std::ostream &out, Square &square); //might not be necessary
 };

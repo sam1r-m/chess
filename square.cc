@@ -27,6 +27,10 @@ void Square::addPiece(Piece *p){
 
 void Square::attach(Observer *o) {observers.emplace_back(o);}
 
+void Square::detachObservers() {
+    observers.clear();
+}
+
 void Square::notifyObservers(){
     for (int i = 0; i < observers.size(); ++i){
 	    observers[i]->notify(*this);

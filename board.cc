@@ -8,8 +8,6 @@ void changeCoords(int *x, int *y){
 }
 
 Board::Board(){
-    td = std::make_unique<TextDisplay>();
-
     // create rows of squares with corresponding coordinates
     for (int i = boardSize; i > 0; --i){
         std::vector<Square> row;
@@ -20,6 +18,12 @@ Board::Board(){
 
         board.emplace_back(row);
     }
+}
+
+Board::~Board() {}
+
+void Board::initializeBoard(){
+    td = std::make_unique<TextDisplay>();
 
     //add Black Pieces
     std::unique_ptr<Rook> BRook1 = std::make_unique<Rook>(Color::BLACK, 1, 8);
@@ -87,12 +91,23 @@ Board::Board(){
             //attach graphicsDisplay
         }
     }
-
-    // set up pieces in starting postitions
-
 }
 
-Board::~Board() {}
+void Board::resetBoard(){
+    for (int i = 1; i <= boardSize; ++i){
+        for (int j = 1; j <= boardSize; ++j){
+            removePieceAt(i, j);
+        }
+    }
+
+    //remove Observers
+    for (int k = 0; k < boardSize; ++k){
+        for (int l = 0; l < boardSize; ++l){
+            board[k][l].detachObservers();
+            //detach graphicsDisplay
+        }
+    }
+}
 
 void Board::addPieceAt(int x, int y, std::unique_ptr<Piece> piece){
     changeCoords(&x, &y);
