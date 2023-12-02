@@ -150,7 +150,7 @@ bool Board::makeMove(int fromX, int fromY, int toX, int toY){
 
 // added getSquareAt
 const Square& Board::getSquareAt(int x, int y) const {
-    return board[x][y];
+    return board[y][x];
 }
 
 // added getBoard()

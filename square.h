@@ -18,8 +18,8 @@ class Square {
 
     int getX();
     int getY();
-    Piece *getPiece();
-    bool isOccupied();
+    Piece *getPiece() const;
+    bool isOccupied() const;
 
     void addPiece(Piece *p);
     void attach(Observer *o);

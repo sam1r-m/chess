@@ -7,11 +7,13 @@
 
 class Player {
     Color playerColor;
+    Board *b;
     std::vector<Move> moves;
-
+    
     public:
+        Player(Color c, Board *board);
         virtual ~Player();
-        virtual void getMoves() const = 0;
+        void generateAllMoves();
         virtual void makeMove() = 0;
 };
 

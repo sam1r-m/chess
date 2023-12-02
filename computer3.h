@@ -6,9 +6,8 @@
 class Computer3: public Player {
 
     public:
-        Computer3();
+        Computer3(Color c, Board *board);
         ~Computer3();
-        void getMoves() const override;
         void makeMove() override;
 };
 

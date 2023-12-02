@@ -12,11 +12,11 @@ int Square::getY(){
     return yPos;
 }
 
-Piece *Square::getPiece(){
+Piece *Square::getPiece() const{
     return piece;
 }
 
-bool Square::isOccupied(){
+bool Square::isOccupied() const{
     // nullptr (false) if there is no piece, true otherwise
     return piece;
 }

@@ -6,9 +6,8 @@
 class Human: public Player {
 
     public:
-        Human();
+        Human(Color c, Board *board);
         ~Human();
-        void getMoves() const override;
         void makeMove() override;
 };
 

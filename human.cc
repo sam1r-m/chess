@@ -1,12 +1,8 @@
 #include "human.h"
 
-Human::Human() {}
+Human::Human(Color c, Board *board): Player(c, board) {}
 
 Human::~Human() {}
-
-void Human::getMoves() const{
-
-}
 
 void Human::makeMove(){
 

@@ -138,8 +138,12 @@ void Game::processCommand(const std::string& command) {
 
             //check that there is one king on either side, no pawns are on the
             //  first or last row, and that neither king is in check before leaving
-            std::cout << board;
-            setUpMode = false;
+            if (validSetup()){
+                std::cout << board;
+                setUpMode = false;
+            } else {
+                std::cout << "Invalid setup." << std::endl;
+            }
 
         } else {
             std::cout << "Invalid command." << std::endl;
@@ -175,19 +179,19 @@ bool Game::startGame(std::string wp, std::string bp){
     bool validPlayer = true;
 
     //set type of whitePlayer
-    if (wp == "human") whitePlayer = std::make_unique<Human>();
-    else if (wp == "computer[1]") whitePlayer = std::make_unique<Computer1>();
-    else if (wp == "computer[2]") whitePlayer = std::make_unique<Computer2>();
-    else if (wp == "computer[3]") whitePlayer = std::make_unique<Computer3>();
-    else if (wp == "computer[4]") whitePlayer = std::make_unique<Computer4>();
+    if (wp == "human") whitePlayer = std::make_unique<Human>(Color::WHITE, &board);
+    else if (wp == "computer[1]") whitePlayer = std::make_unique<Computer1>(Color::WHITE, &board);
+    else if (wp == "computer[2]") whitePlayer = std::make_unique<Computer2>(Color::WHITE, &board);
+    else if (wp == "computer[3]") whitePlayer = std::make_unique<Computer3>(Color::WHITE, &board);
+    else if (wp == "computer[4]") whitePlayer = std::make_unique<Computer4>(Color::WHITE, &board);
     else validPlayer = false;
 
     //set type of blackPlayer
-    if (bp == "human") blackPlayer = std::make_unique<Human>();
-    else if (bp == "computer[1]") blackPlayer = std::make_unique<Computer1>();
-    else if (bp == "computer[2]") blackPlayer = std::make_unique<Computer2>();
-    else if (bp == "computer[3]") blackPlayer = std::make_unique<Computer3>();
-    else if (bp == "computer[4]") whitePlayer = std::make_unique<Computer4>();
+    if (bp == "human") blackPlayer = std::make_unique<Human>(Color::BLACK, &board);
+    else if (bp == "computer[1]") blackPlayer = std::make_unique<Computer1>(Color::BLACK, &board);
+    else if (bp == "computer[2]") blackPlayer = std::make_unique<Computer2>(Color::BLACK, &board);
+    else if (bp == "computer[3]") blackPlayer = std::make_unique<Computer3>(Color::BLACK, &board);
+    else if (bp == "computer[4]") whitePlayer = std::make_unique<Computer4>(Color::BLACK, &board);
     else validPlayer = false;
 
     return validPlayer;
@@ -275,17 +279,64 @@ void Game::changeTurn(std::string color){
 }
 
 bool Game::validSetup(){
-    bool valid = true;
-    int WKingCount, BKingCount;
+    int WKingCount = 0;
+    int BKingCount = 0;
 
     //check for number of Kings
     for (int i = 0; i < 8; ++i){
         for (int j = 0; j < 8; ++j){
-            
 
+            if (board.getSquareAt(i, j).isOccupied()){
+                char piece = board.getSquareAt(i, j).getPiece()->getChar();
 
+                //if Piece at Square is a King, add to count
+                if (piece == 'K'){
+                    ++WKingCount;
+
+                } else if (piece == 'k'){
+                    ++BKingCount;
+
+                }
+            }
         }
     }
+
+    if (WKingCount != 1 || BKingCount != 1) {
+        std::cout << "Incorrect number of Kings. ";
+        return false;
+    }
+    
+    //check for Pawns in last row 
+    for (int k = 0; k < 8; ++k){
+        if (board.getSquareAt(k, 0).isOccupied()){
+            char piece = board.getSquareAt(k, 0).getPiece()->getChar();
+
+            if (piece == 'P' || piece == 'p') {
+                std::cout << "Pawn(s) in back rank. ";
+                return false;
+            }
+        }
+    }
+
+    //check for Pawns in first row
+    for (int l = 0; l < 8; ++l){
+        if (board.getSquareAt(l, 7).isOccupied()){
+            char piece = board.getSquareAt(l, 7).getPiece()->getChar();
+
+            if (piece == 'P' || piece == 'p') {
+                std::cout << "Pawn(s) in back rank. ";
+                return false;
+            }
+        }
+    }
+
+    //check for check on both Kings
+    if (check) {
+        std::cout << "A Player is in check. ";
+        return false;
+    }
+
+    return true;
 }
 
 void Game::endGame(){
