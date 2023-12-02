@@ -16,6 +16,6 @@ char Pawn::getChar() const{
     else return 'P';
 }
 
-std::vector<Move> Pawn::generateMoves() const{
+std::vector<Move> Pawn::generateMoves(Board *board) const{
     
 }

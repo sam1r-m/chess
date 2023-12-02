@@ -16,6 +16,6 @@ char Rook::getChar() const{
     else return 'R';
 }
 
-std::vector<Move> Rook::generateMoves() const{
+std::vector<Move> Rook::generateMoves(Board *board) const{
     
 }

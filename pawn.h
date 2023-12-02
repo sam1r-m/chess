@@ -12,7 +12,7 @@ public:
 
     bool isValidMove(int toX, int toY) const override;
     char getChar() const override;
-    std::vector<Move> generateMoves() const override;
+    std::vector<Move> generateMoves(Board *board) const override;
 };
 
 #endif

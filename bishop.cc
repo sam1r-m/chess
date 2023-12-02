@@ -16,6 +16,6 @@ char Bishop::getChar() const{
     else return 'B';
 }
 
-std::vector<Move> Bishop::generateMoves() const{
+std::vector<Move> Bishop::generateMoves(Board *board) const{
     
 }

@@ -7,6 +7,7 @@
 #include "move.h"
 
 enum class Color { WHITE, BLACK };
+class Board;
 
 class Piece {
 protected:
@@ -35,7 +36,7 @@ public:
     // end of setBoard and getBoard
 
     // Pure virtual function generateMoves() added
-    virtual std::vector<Move> generateMoves() const = 0;
+    virtual std::vector<Move> generateMoves(Board *board) const = 0;
 };
 
 #endif

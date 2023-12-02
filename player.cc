@@ -13,7 +13,7 @@ void Player::generateAllMoves(){
             //iterate through Board, call generateMoves on every 
             //  Piece of the same Color
             if (b->getSquareAt(i, j).isOccupied() && b->getSquareAt(i, j).getPiece()->getColor() == playerColor){
-                std::vector<Move> pieceMoves = b->getSquareAt(i, j).getPiece()->generateMoves();
+                std::vector<Move> pieceMoves = b->getSquareAt(i, j).getPiece()->generateMoves(b);
 
                 //add Piece Moves to playerMoves vector
                 for (int k = 0; k < pieceMoves.size(); ++k){

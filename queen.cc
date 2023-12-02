@@ -16,6 +16,6 @@ char Queen::getChar() const{
     else return 'Q';
 }
 
-std::vector<Move> Queen::generateMoves() const{
+std::vector<Move> Queen::generateMoves(Board *board) const{
     
 }

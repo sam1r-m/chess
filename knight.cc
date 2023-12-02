@@ -43,6 +43,6 @@ char Knight::getChar() const{
     else return 'N';
 }
 
-std::vector<Move> Knight::generateMoves() const{
+std::vector<Move> Knight::generateMoves(Board *board) const{
     
 }
