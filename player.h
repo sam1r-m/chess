@@ -6,11 +6,11 @@
 #include "board.h"
 
 class Player {
-    Color playerColor;
-    Board *b;
-    std::vector<Move> playerMoves;
     protected:
+        Color playerColor;
+        Board *b;
         bool humanPlayer;
+        std::vector<Move> playerMoves;
 
     public:
         Player(Color c, Board *board);
