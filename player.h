@@ -8,7 +8,7 @@
 class Player {
     Color playerColor;
     Board *b;
-    std::vector<Move> moves;
+    std::vector<Move> playerMoves;
     
     public:
         Player(Color c, Board *board);
