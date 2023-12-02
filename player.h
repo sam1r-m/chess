@@ -9,12 +9,15 @@ class Player {
     Color playerColor;
     Board *b;
     std::vector<Move> playerMoves;
-    
+    protected:
+        bool humanPlayer;
+
     public:
         Player(Color c, Board *board);
         virtual ~Player();
         void generateAllMoves();
         virtual void makeMove() = 0;
+        bool isHuman();
 };
 
 #endif

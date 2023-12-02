@@ -23,3 +23,7 @@ void Player::generateAllMoves(){
         }
     }
 }
+
+bool Player::isHuman(){
+    return humanPlayer;
+}
