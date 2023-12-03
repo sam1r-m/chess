@@ -16,8 +16,7 @@ void Player::generateAllMoves(){
             //  Piece of the same Color
             if (b->getSquareAt(i, j).isOccupied() && b->getSquareAt(i, j).getPiece()->getColor() == playerColor){
                 pieceMoves = b->getSquareAt(i, j).getPiece()->generateMoves(b);
-                    std::cout << "Gen" << std::endl;
-                    std::cout << pieceMoves.size() << std::endl;
+
                 //add Piece Moves to playerMoves vector
                 for (int k = 0; k < pieceMoves.size(); k++){
                     playerMoves.emplace_back(pieceMoves[k]);  

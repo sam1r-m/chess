@@ -21,7 +21,7 @@ std::vector<Move> Pawn::generateMoves(Board *board) const{
     std::vector<Move> moves;
     int deltaX = 1;
     int deltaY;
-    std::cout << "Getting Pawn Moves" << std::endl;
+
     //Black Pawns move down, White Pawns move up
     if (color == Color::BLACK) deltaY = -1;
     else deltaY = 1;
