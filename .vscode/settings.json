@@ -56,6 +56,10 @@
         "compare": "cpp",
         "concepts": "cpp",
         "random": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "__mutex_base": "cpp",
+        "clocale": "cpp",
+        "cmath": "cpp",
+        "optional": "cpp"
     }
 }
