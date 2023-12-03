@@ -41,7 +41,7 @@ char Queen::getChar() const{
 std::vector<Move> Queen::generateMoves(Board *board) const{
     std::vector<Move> moves;
 
-    for (int i = 0; i < 8; ++i) { // checks every quare on the board
+    for (int i = 0; i < 8; ++i) { // checks every square on the board
         for (int j = 0; j < 8; ++j) {
             bool captures = false; // Default to false
 

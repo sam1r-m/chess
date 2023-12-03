@@ -23,8 +23,14 @@ std::vector<Move> Pawn::generateMoves(Board *board) const{
     int deltaY;
 
     //Black Pawns move down, White Pawns move up
-    if (color == Color::BLACK) deltaY = -1;
-    else deltaY = 1;
+    if (color == Color::BLACK){
+        if (y != 7) firstMove = false;
+        deltaY = -1;
+    } 
+    else {
+        if (y != 2) firstMove = false;
+        deltaY = 1;
+    }
 
     if (1 <= y + deltaY * 2 && y + deltaY * 2 <= 8){
         //can move 2 Square on first move, if 2 Squares ahead aren't occupied

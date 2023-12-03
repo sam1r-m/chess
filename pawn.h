@@ -4,7 +4,7 @@
 #include "piece.h"
 
 class Pawn: public Piece{
-    bool firstMove; // to check if pawn can move two squares
+    mutable bool firstMove; // to check if pawn can move two squares
 
 public:
     Pawn(Color col, int posX, int posY);
