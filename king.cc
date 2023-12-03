@@ -17,5 +17,6 @@ char King::getChar() const{
 }
 
 std::vector<Move> King::generateMoves(Board *board) const{
-    
+    std::vector<Move> moves;
+    return moves;
 }

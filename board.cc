@@ -117,35 +117,46 @@ void Board::addPieceAt(int x, int y, std::unique_ptr<Piece> piece){
         removePieceAt(x + 1, 8 - y);
     }
 
-    pieces.emplace_back(std::move(piece));
-    board[y][x].addPiece(pieces[pieces.size() - 1].get());
+    pieces.push_back(std::move(piece));
+    board[y][x].addPiece(pieces.back().get());
     board[y][x].notifyObservers();
 }
 
 void Board::removePieceAt(int x, int y){
-    bool found = false;
-
     for (auto it = pieces.begin(); it != pieces.end(); ++it) {
         if (x == it->get()->getX() && y == it->get()->getY()) {
             pieces.erase(it);
+
             changeCoords(&x, &y);
+            
             board[y][x].addPiece(nullptr);
-            found = true;
+            board[y][x].notifyObservers();
+
+            return;
+        }
+    }
+}
+
+void Board::makeMove(int fromX, int fromY, int toX, int toY){
+    Piece *p = getSquareAt(fromX - 1, 8 - fromY).getPiece();
+
+    removePieceAt(toX, toY);
+
+    for (int i = 0; i < pieces.size(); ++i){
+        if (p == pieces[i].get()) {
+            pieces[i]->setX(toX);
+            pieces[i]->setY(toY);
             break;
         }
     }
 
-    if (!found) {
-        return;
-    }
-
-    board[y][x].notifyObservers();
-}
-
-bool Board::makeMove(int fromX, int fromY, int toX, int toY){
-    changeCoords(&fromX, &fromY);
     changeCoords(&toX, &toY);
+    board[toY][toX].addPiece(p);
+    board[toY][toX].notifyObservers();
 
+    changeCoords(&fromX, &fromY);
+    board[fromY][fromX].addPiece(nullptr);
+    board[fromY][fromX].notifyObservers();
 }
 
 // added getSquareAt

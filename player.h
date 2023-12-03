@@ -16,7 +16,7 @@ class Player {
         Player(Color c, Board *board);
         virtual ~Player();
         void generateAllMoves();
-        virtual void makeMove() = 0;
+        virtual bool makeMove(int fromX, int fromY, int toX, int toY) = 0;
         bool isHuman();
 };
 

@@ -8,7 +8,7 @@ class Human: public Player {
     public:
         Human(Color c, Board *board);
         ~Human();
-        void makeMove() override;
+        virtual bool makeMove(int fromX, int fromY, int toX, int toY) override;
 };
 
 #endif

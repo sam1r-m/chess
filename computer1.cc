@@ -6,10 +6,10 @@
 Computer1::Computer1(Color c, Board *board): Computer(c, board) {}
 Computer1::~Computer1() {}
 
-void Computer1::makeMove() {
+bool Computer1::makeMove(int fromX, int fromY, int toX, int toY) {
     generateAllMoves();
     if (playerMoves.empty()) {
-        return; // when there are no available moves?
+        return false; // when there are no available moves?
     }
 
     int length = playerMoves.size() - 1;
@@ -19,5 +19,6 @@ void Computer1::makeMove() {
     Move randomMove = playerMoves[randomIndex];
 
     b->makeMove(randomMove.getStartX(), randomMove.getStartY(), randomMove.getEndX(), randomMove.getEndY());
+    return true;
 }
 

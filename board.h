@@ -41,7 +41,7 @@ class Board {
     void addPieceAt(int x, int y, std::unique_ptr<Piece> piece);
     void removePieceAt(int x, int y);
 
-    bool makeMove(int fromX, int fromY, int toX, int toY);
+    void makeMove(int fromX, int fromY, int toX, int toY);
     friend std::ostream &operator<<(std::ostream &out, const Board &b);
 };
 

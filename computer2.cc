@@ -6,6 +6,6 @@ Computer2::Computer2(Color c, Board *board): Player(c, board) {
 
 Computer2::~Computer2() {}
 
-void Computer2::makeMove(){
+bool Computer2::makeMove(int fromX, int fromY, int toX, int toY){
 
 }

@@ -8,7 +8,7 @@ class Computer3: public Player {
     public:
         Computer3(Color c, Board *board);
         ~Computer3();
-        void makeMove() override;
+        bool makeMove(int fromX, int fromY, int toX, int toY) override;
 };
 
 #endif

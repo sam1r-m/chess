@@ -59,17 +59,17 @@ void Game::processCommand(const std::string& command) {
 
             //if current Player is a Computer, only need "move" command
 
-            if (!(blackPlayer.get()->isHuman()) && blackTurn){
+            // if (!(blackPlayer.get()->isHuman()) && blackTurn){
                 // blackPlayer.get()->generateAllMoves();
                 // blackPlayer.get()->makeMove();
 
-            } else if (!(whitePlayer.get()->isHuman()) && !blackTurn){
+            // } else if (!(whitePlayer.get()->isHuman()) && !blackTurn){
                 // whitePlayer.get()->generateAllMoves();
                 // whitePlayer.get()->makeMove();
 
             //if current Player is a Human, require start and end
             //  coordinates as part of input
-            } else {
+            // } else {
 
                 std::string start, end;
                 iss >> start >> end;
@@ -84,20 +84,21 @@ void Game::processCommand(const std::string& command) {
                 if (validCoords(fromX, fromY) && validCoords(toX, toY)){
                     
                     if (blackTurn){
-                        // blackPlayer.get()->generateAllMoves();
-                        // blackPlayer.get()->makeMove();
+                        blackPlayer.get()->generateAllMoves();
+                        if (blackPlayer.get()->makeMove(fromX, fromY, toX, toY)) blackTurn = !blackTurn;
+
                     } else {
-                        // whitePlayer.get()->generateAllMoves();
-                        // whitePlayer.get()->makeMove();
+                        whitePlayer.get()->generateAllMoves();
+                        if (whitePlayer.get()->makeMove(fromX, fromY, toX, toY)) blackTurn = !blackTurn;
                     }
 
                 } else {
                     std::cout << "Invalid coordinates. Expected: move (a-h)(1-8) (a-h)(1-8)" << std::endl;
                     return;
                 }
-            }
+            // }
 
-            blackTurn = !blackTurn;
+            // blackTurn = !blackTurn;
 
             if (checkmate) {
                 cout << "Checkmate! ";

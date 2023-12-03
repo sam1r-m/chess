@@ -9,7 +9,7 @@
 class Square {
     const int xPos;
     const int yPos;
-    Piece *piece;
+    Piece *piece = nullptr;
     std::vector<Observer*> observers;
 
     public:

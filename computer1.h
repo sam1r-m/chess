@@ -8,7 +8,7 @@ class Computer1: public Computer {
     public:
         Computer1(Color c, Board *board);
         ~Computer1();
-        virtual void makeMove() override;
+        virtual bool makeMove(int fromX, int fromY, int toX, int toY) override;
 };
 
 #endif
