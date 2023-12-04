@@ -59,17 +59,17 @@ void Game::processCommand(const std::string& command) {
 
             //if current Player is a Computer, only need "move" command
 
-            // if (!(blackPlayer.get()->isHuman()) && blackTurn){
-                // blackPlayer.get()->generateAllMoves();
-                // blackPlayer.get()->makeMove();
+            if (!(blackPlayer.get()->isHuman()) && blackTurn){
+                blackPlayer.get()->generateAllMoves();
+                if (blackPlayer.get()->makeMove(0, 0, 0, 0)) blackTurn = !blackTurn;
 
-            // } else if (!(whitePlayer.get()->isHuman()) && !blackTurn){
-                // whitePlayer.get()->generateAllMoves();
-                // whitePlayer.get()->makeMove();
+            } else if (!(whitePlayer.get()->isHuman()) && !blackTurn){
+                whitePlayer.get()->generateAllMoves();
+                if (whitePlayer.get()->makeMove(0, 0, 0, 0)) blackTurn = !blackTurn;
 
             //if current Player is a Human, require start and end
             //  coordinates as part of input
-            // } else {
+            } else {
 
                 std::string start, end;
                 iss >> start >> end;
@@ -96,7 +96,7 @@ void Game::processCommand(const std::string& command) {
                     std::cout << "Invalid coordinates. Expected: move (a-h)(1-8) (a-h)(1-8)" << std::endl;
                     return;
                 }
-            // }
+            }
 
             // blackTurn = !blackTurn;
 
@@ -204,18 +204,18 @@ bool Game::startGame(std::string wp, std::string bp){
 
     //set type of whitePlayer
     if (wp == "human") whitePlayer = std::make_unique<Human>(Color::WHITE, &board);
-    else if (wp == "computer[1]") whitePlayer = std::make_unique<Computer1>(Color::WHITE, &board);
-    else if (wp == "computer[2]") whitePlayer = std::make_unique<Computer2>(Color::WHITE, &board);
-    else if (wp == "computer[3]") whitePlayer = std::make_unique<Computer3>(Color::WHITE, &board);
-    else if (wp == "computer[4]") whitePlayer = std::make_unique<Computer4>(Color::WHITE, &board);
+    else if (wp == "computer1") whitePlayer = std::make_unique<Computer1>(Color::WHITE, &board);
+    else if (wp == "computer2") whitePlayer = std::make_unique<Computer2>(Color::WHITE, &board);
+    else if (wp == "computer3") whitePlayer = std::make_unique<Computer3>(Color::WHITE, &board);
+    else if (wp == "computer4") whitePlayer = std::make_unique<Computer4>(Color::WHITE, &board);
     else validPlayer = false;
 
     //set type of blackPlayer
     if (bp == "human") blackPlayer = std::make_unique<Human>(Color::BLACK, &board);
-    else if (bp == "computer[1]") blackPlayer = std::make_unique<Computer1>(Color::BLACK, &board);
-    else if (bp == "computer[2]") blackPlayer = std::make_unique<Computer2>(Color::BLACK, &board);
-    else if (bp == "computer[3]") blackPlayer = std::make_unique<Computer3>(Color::BLACK, &board);
-    else if (bp == "computer[4]") whitePlayer = std::make_unique<Computer4>(Color::BLACK, &board);
+    else if (bp == "computer1") blackPlayer = std::make_unique<Computer1>(Color::BLACK, &board);
+    else if (bp == "computer2") blackPlayer = std::make_unique<Computer2>(Color::BLACK, &board);
+    else if (bp == "computer3") blackPlayer = std::make_unique<Computer3>(Color::BLACK, &board);
+    else if (bp == "computer4") whitePlayer = std::make_unique<Computer4>(Color::BLACK, &board);
     else validPlayer = false;
 
     return validPlayer;
