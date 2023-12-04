@@ -28,6 +28,6 @@ void GraphicsDisplay::drawBoard() {
         }
     }
     //xw.fillRectangle(x, y, squareSize, squareSize, Xwindow::White);
-    xw.drawString(0, 0, std::string(1, 'a'));
+    // xw.drawString(0, 0, std::string(1, 'a'));
     //xw.drawString(x + 20, y + 30, std::string(1, piece->getChar()));
 }
