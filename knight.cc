@@ -13,6 +13,8 @@ bool Knight::isValidMove(int toX, int toY, Board *board) const{
     int deltaY = toY - getY(); // change in y
     // L shape: so change in x is 2 y is 1 or change in x is 1 y is 2
     bool correct = ((abs(deltaX) == 2 && abs(deltaY) == 1) || (abs(deltaX) == 1 && abs(deltaY) == 2));
+    // Check if moved to same position
+    if (deltaX == 0 && deltaY == 0) {return false;}
     // Check if L move made
     if (!correct) {
         // correct = false;

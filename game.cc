@@ -1,16 +1,19 @@
 #include "game.h"
 #include <vector>
 #include <string>
+#include "graphicsDisplay.h"
 using namespace std;
 
 bool validCoords(int x, int y) {
     return (1 <= x) && (x <= 8) && (1 <= y) && (y <= 8);
 }
 
-Game::Game() {
+// Game::Game() : graphicsDisplay(500,500,8,board.getBoard()) { // Initialize graphicalDisplay in constructor
+//     board.initializeBoard();
+// }
+Game::Game() : graphicsDisplay(board.getBoard()) { // Initialize graphicalDisplay in constructor
     board.initializeBoard();
 }
-
 //board must be redrawn both in text and graphically, each time a move command is issued
 void Game::processCommand(const std::string& command) {
     std::istringstream iss(command);
@@ -28,16 +31,17 @@ void Game::processCommand(const std::string& command) {
                 gameMode = true;
                 std::cout << board;
                 std::cout << "Game start." << std::endl;
-
+                graphicsDisplay.drawBoard();
             } else {
                 std::cout << "Invalid player type. Expected: game (human/computer[1/2/3/4]) (human/computer[1/2/3/4])" << std::endl;
             }
 
-            return;
+            //return;
 
         } else if (cmd == "setup") {
             setUpMode = true;
             std::cout << board;
+            graphicsDisplay.drawBoard();
             std::cout << "Entering setup mode." << std::endl;
             return;
 
@@ -102,7 +106,7 @@ void Game::processCommand(const std::string& command) {
             }
 
             std::cout << board;
-
+            graphicsDisplay.drawBoard();
             if (checkmate) {
                 cout << "Checkmate! ";
                 endGame();
