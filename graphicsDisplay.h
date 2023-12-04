@@ -11,12 +11,12 @@
 class GraphicsDisplay : public Observer {
     Xwindow xw;
     int boardSize;
-    std::vector<std::vector<char>> theDisplay;  // To store the current state of the board
 
 public:
-    GraphicsDisplay(int boardSize, int width, int height);
+   GraphicsDisplay(int width, int height, int boardSize);
     void notify(Square &s) override;
-    void redraw();  // Redraws the entire board
+    void drawBoard();
+    void drawPiece(Square &square);
 };
 
 
