@@ -40,14 +40,6 @@ Xwindow::Xwindow(int width, int height) {
   }
 
   XSetForeground(d,gc,colours[2]);
-
-  // Make window non-resizeable.
-  // XSizeHints hints;
-  // hints.flags = (USPosition | PSize | PMinSize | PMaxSize );
-  // hints.height = hints.base_height = hints.min_height = hints.max_height = height;
-  // hints.width = hints.base_width = hints.min_width = hints.max_width = width;
-  // XSetNormalHints(d, w, &hints);
-
   XSynchronize(d,True);
 
   usleep(1000);
@@ -71,4 +63,8 @@ void Xwindow::drawString(int x, int y, string msg) {
 void Xwindow::drawPiece(char piece, int x, int y, int width, int height) {
   std::string pieceStr(1, piece);
   drawString(x + width / 2, y + height / 2, pieceStr);
+}
+
+void Xwindow::setTextColor(int color) {
+  XSetForeground(d, gc, colours[color]);
 }

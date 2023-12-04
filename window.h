@@ -26,6 +26,7 @@ class Xwindow {
 
   void drawPiece(char piece, int x, int y, int width, int height);
 
+  void setTextColor(int color);
 };
 
 #endif
