@@ -17,6 +17,7 @@ bool Computer1::makeMove(int fromX, int fromY, int toX, int toY) {
 
     Move randomMove = playerMoves[randomIndex];
 
+    prevMoves.emplace_back(playerMoves[randomIndex]);
     b->makeMove(randomMove.getStartX(), randomMove.getStartY(), randomMove.getEndX(), randomMove.getEndY());
     return true;
 }

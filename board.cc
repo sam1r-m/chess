@@ -95,6 +95,7 @@ void Board::initializeBoard(){
 }
 
 void Board::resetBoard(){
+    pieces.clear();
     for (int i = 1; i <= boardSize; ++i){
         for (int j = 1; j <= boardSize; ++j){
             removePieceAt(i, j);
@@ -105,7 +106,6 @@ void Board::resetBoard(){
     for (int k = 0; k < boardSize; ++k){
         for (int l = 0; l < boardSize; ++l){
             board[k][l].detachObservers();
-            //detach graphicsDisplay
         }
     }
 }
@@ -126,6 +126,7 @@ void Board::addPieceAt(int x, int y, std::unique_ptr<Piece> piece){
 void Board::removePieceAt(int x, int y){
     for (auto it = pieces.begin(); it != pieces.end(); ++it) {
         if (x == it->get()->getX() && y == it->get()->getY()) {
+            removedPieces.emplace_back(std::move(*it));
             pieces.erase(it);
 
             changeCoords(&x, &y);
@@ -136,6 +137,10 @@ void Board::removePieceAt(int x, int y){
             return;
         }
     }
+}
+
+std::unique_ptr<Piece> Board::getRemovedPiece(){
+    return std::move(removedPieces[removedPieces.size() - 1]);
 }
 
 void Board::makeMove(int fromX, int fromY, int toX, int toY){
@@ -160,12 +165,9 @@ void Board::makeMove(int fromX, int fromY, int toX, int toY){
     board[fromY][fromX].notifyObservers();
 }
 
-// added getSquareAt
 const Square& Board::getSquareAt(int x, int y) const {
     return board[y][x];
 }
-
-// added getBoard()
 
 const vector<vector<Square>>& Board::getBoard() const {
     return board;

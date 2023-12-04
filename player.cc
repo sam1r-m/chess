@@ -26,6 +26,24 @@ void Player::generateAllMoves(){
     }
 }
 
+void Player::undoMove(){
+    if (prevMoves.size() == 0) return;
+    int startX = prevMoves[prevMoves.size() - 1].getStartX();
+    int startY = prevMoves[prevMoves.size() - 1].getStartY();
+    int endX = prevMoves[prevMoves.size() - 1].getEndX();
+    int endY = prevMoves[prevMoves.size() - 1].getEndY();
+
+    //Move Piece to original position
+    b->makeMove(endX, endY, startX, startY);
+
+    //If Move captured a Piece, place it back on
+    //  the Board
+    if (prevMoves[prevMoves.size() - 1].doesCapture()){
+        b->addPieceAt(endX, endY, b->getRemovedPiece());
+    }
+    prevMoves.pop_back();
+}
+
 std::vector<Move> Player::getMoves(){
     return playerMoves;
 }

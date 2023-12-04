@@ -57,6 +57,28 @@ void Game::processCommand(const std::string& command) {
         if (cmd == "resign"){
             endGame();
 
+        } else if (cmd == "undo"){
+            if (blackTurn){
+                whitePlayer.get()->undoMove();
+                blackTurn = !blackTurn;
+                std::cout << board;
+
+            } else {
+                blackPlayer.get()->undoMove();
+                blackTurn = !blackTurn;
+                std::cout << board;
+
+            }
+
+            std::cout << "Undo previous move. ";
+
+            if (blackTurn) {
+                    cout << "Black's ";
+                } else {
+                    cout << "White's ";
+                }
+                cout << "turn again."  << endl;
+
         //different for computer (no coordinates), pawn promotion takes 
         //  in additional argument
         } else if (cmd == "move") {
@@ -406,7 +428,8 @@ bool Game::validSetup(){
         }
     }
 
-    //check for check on both Kings
+    //check for check on both Kings using temporary
+    //  Players to generate Moves
     whitePlayer = std::make_unique<Human>(Color::WHITE, &board);
     blackPlayer = std::make_unique<Human>(Color::BLACK, &board);
     if (inCheck(Color::WHITE) || inCheck(Color::BLACK)) {

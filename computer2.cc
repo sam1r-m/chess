@@ -12,7 +12,8 @@ bool Computer2::makeMove(int fromX, int fromY, int toX, int toY){
         if (playerMoves[i].doesCapture()){
             b->makeMove(playerMoves[i].getStartX(), playerMoves[i].getStartY(), 
                         playerMoves[i].getEndX(), playerMoves[i].getEndY());
-                        return true;
+            prevMoves.emplace_back(playerMoves[i]);
+            return true;
         }
     }
 
@@ -31,6 +32,7 @@ bool Computer2::makeMove(int fromX, int fromY, int toX, int toY){
 
     Move randomMove = playerMoves[randomIndex];
 
+    prevMoves.emplace_back(playerMoves[randomIndex]);
     b->makeMove(randomMove.getStartX(), randomMove.getStartY(), randomMove.getEndX(), randomMove.getEndY());
     return true;
 }

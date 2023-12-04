@@ -23,6 +23,7 @@ class Piece;
 class Board {
     std::vector<std::vector<Square>> board; // 2D array of Squares
     std::vector<std::unique_ptr<Piece>> pieces; // All the pieces on the board 
+    std::vector<std::unique_ptr<Piece>> removedPieces; // All the pieces taken from the board 
     const int boardSize = 8;
     std::unique_ptr<TextDisplay> td;
     std::unique_ptr<GraphicsDisplay> gd;
@@ -42,6 +43,7 @@ class Board {
     const std::vector<std::vector<Square>>& getBoard() const;
     void addPieceAt(int x, int y, std::unique_ptr<Piece> piece);
     void removePieceAt(int x, int y);
+    std::unique_ptr<Piece> getRemovedPiece();
 
     void makeMove(int fromX, int fromY, int toX, int toY);
     friend std::ostream &operator<<(std::ostream &out, const Board &b);
