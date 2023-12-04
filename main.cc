@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "game.h"
-#include "GraphicsDisplay.h"
+#include "graphicsDisplay.h"
 
 using namespace std;
 

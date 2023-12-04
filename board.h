@@ -4,6 +4,7 @@
 
 #include "square.h"
 #include "textDisplay.h"
+#include "graphicsDisplay.h"
 #include "piece.h"
 #include "pawn.h"
 #include "rook.h"
@@ -24,6 +25,7 @@ class Board {
     std::vector<std::unique_ptr<Piece>> pieces; // All the pieces on the board 
     const int boardSize = 8;
     std::unique_ptr<TextDisplay> td;
+    std::unique_ptr<GraphicsDisplay> gd;
 
     public:
     Board();

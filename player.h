@@ -17,6 +17,7 @@ class Player {
         virtual ~Player();
         void generateAllMoves();
         virtual bool makeMove(int fromX, int fromY, int toX, int toY) = 0;
+        std::vector<Move> getMoves();
         bool isHuman();
 };
 

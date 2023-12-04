@@ -26,8 +26,7 @@ class Game {
     bool setUpMode = false; //true if in setup mode
     bool blackTurn = false; //true if it is black's turn, false if it is white's
     bool checkmate = false; //true if either player is in checkmate/loses (might change later)
-    bool staleMate = false;
-    bool check = false;
+    bool stalemate = false;
     std::unique_ptr<Player> whitePlayer; 
     std::unique_ptr<Player> blackPlayer;
     float whiteScore, blackScore; //stores white and black's scores
@@ -36,6 +35,7 @@ class Game {
     bool startGame(std::string wp, std::string bp);
     void addPiece(std::string pieceType, std::string posn);
     void changeTurn(std::string color);
+    bool inCheck(Color color);
     bool validSetup();
     void endGame();
 

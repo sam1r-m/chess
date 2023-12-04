@@ -26,6 +26,10 @@ void Player::generateAllMoves(){
     }
 }
 
+std::vector<Move> Player::getMoves(){
+    return playerMoves;
+}
+
 bool Player::isHuman(){
     return humanPlayer;
 }

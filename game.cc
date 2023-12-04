@@ -1,4 +1,5 @@
 #include "game.h"
+#include "move.h"
 #include <vector>
 #include <string>
 using namespace std;
@@ -103,24 +104,20 @@ void Game::processCommand(const std::string& command) {
 
             std::cout << board;
 
+            //check if Player is in check (opponent has Move that
+            //  can take King)
+            if (blackTurn && inCheck(Color::BLACK)) std::cout << "Black is in check." << std::endl;
+            if (!blackTurn && inCheck(Color::WHITE)) std::cout << "White is in check." << std::endl;
+
             if (checkmate) {
                 cout << "Checkmate! ";
                 endGame();
 
-            } else if (staleMate) {
+            } else if (stalemate) {
                 whiteScore += 0.5;
                 blackScore += 0.5;
                 cout << "Stalemate!" << endl;
                 gameMode = false;
-
-            } else if (check) {
-
-                if (blackTurn) {
-                    cout << "Black";
-                } else {
-                    cout << "White";
-                }
-                cout << " is in check."  << endl;
 
             } else {
 
@@ -314,6 +311,49 @@ void Game::changeTurn(std::string color){
     else std::cout << "Invalid color. Expected: = (black/white)" << std::endl;
 }
 
+bool Game::inCheck(Color color){
+    char pieceAt;
+    if (color == Color::BLACK) {
+        //see if White Player has a capturing Move on Square with Black King
+        whitePlayer.get()->generateAllMoves();
+
+        for (std::size_t i = 0; i < whitePlayer.get()->getMoves().size(); ++i){
+
+            if (whitePlayer.get()->getMoves()[i].doesCapture()) {
+                int endX = whitePlayer.get()->getMoves()[i].getEndX();
+                int endY = whitePlayer.get()->getMoves()[i].getEndY();
+                pieceAt = board.getSquareAt(endX - 1, 8 - endY).getPiece()->getChar();
+
+                if (pieceAt == 'k') {
+                    return true;
+
+                }
+            }
+                        
+        }
+
+    //see if Black Player has a capturing Move on Square with White King
+     } else {
+        blackPlayer.get()->generateAllMoves();
+
+        for (std::size_t i = 0; i < blackPlayer.get()->getMoves().size(); ++i){
+
+            if (blackPlayer.get()->getMoves()[i].doesCapture()) {
+                int endX = blackPlayer.get()->getMoves()[i].getEndX();
+                int endY = blackPlayer.get()->getMoves()[i].getEndY();
+                pieceAt = board.getSquareAt(endX - 1, 8 - endY).getPiece()->getChar();
+
+                if (pieceAt == 'K') {
+                    return true;
+
+                }
+            }
+                        
+        }
+     }
+     return false;
+}
+
 bool Game::validSetup(){
     int WKingCount = 0;
     int BKingCount = 0;
@@ -367,7 +407,9 @@ bool Game::validSetup(){
     }
 
     //check for check on both Kings
-    if (check) {
+    whitePlayer = std::make_unique<Human>(Color::WHITE, &board);
+    blackPlayer = std::make_unique<Human>(Color::BLACK, &board);
+    if (inCheck(Color::WHITE) || inCheck(Color::BLACK)) {
         std::cout << "A Player is in check. ";
         return false;
     }
@@ -389,6 +431,5 @@ void Game::endGame(){
     gameMode = false;
     bool blackTurn = false; 
     bool checkmate = false; 
-    bool staleMate = false;
-    bool check = false;
+    bool stalemate = false;
 }
