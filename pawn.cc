@@ -23,6 +23,7 @@ std::vector<Move> Pawn::generateMoves(Board *board) const{
     int deltaY;
 
     //Black Pawns move down, White Pawns move up
+    //  check if Pawn has moved yet
     if (color == Color::BLACK){
         if (y != 7) firstMove = false;
         deltaY = -1;

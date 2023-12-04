@@ -29,6 +29,14 @@ std::vector<Move> Rook::generateMoves(Board *board) const{
     int deltaY = 1;
     int toX, toY;
 
+    //check if Rook has moved yet
+    if (color == Color::BLACK){
+        if ((y != 8) && (x != 1 || x != 8)) firstMove = false;
+    } 
+    else {
+        if ((y != 1) && (x != 1 || x != 8)) firstMove = false;
+    }
+
     //generate rightward Moves
     for (int i = 1; i < 8; ++i){
         toX = x + deltaX * i;

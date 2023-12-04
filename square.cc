@@ -32,7 +32,7 @@ void Square::detachObservers() {
 }
 
 void Square::notifyObservers(){
-    for (int i = 0; i < observers.size(); ++i){
+    for (std::size_t i = 0; i < observers.size(); ++i){
 	    observers[i]->notify(*this);
     } 
 }

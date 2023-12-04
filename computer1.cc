@@ -7,7 +7,6 @@ Computer1::Computer1(Color c, Board *board): Computer(c, board) {}
 Computer1::~Computer1() {}
 
 bool Computer1::makeMove(int fromX, int fromY, int toX, int toY) {
-    generateAllMoves();
     if (playerMoves.empty()) {
         return false; // when there are no available moves?
     }

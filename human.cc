@@ -8,7 +8,7 @@ Human::~Human() {}
 
 bool Human::makeMove(int fromX, int fromY, int toX, int toY){
     //see if Move was generated as valid
-    for (int i = 0; i < playerMoves.size(); ++i){
+    for (std::size_t i = 0; i < playerMoves.size(); ++i){
         if(playerMoves[i].getStartX() == fromX && playerMoves[i].getStartY() == fromY
             && playerMoves[i].getEndX() == toX && playerMoves[i].getEndY() == toY){
                 b->makeMove(fromX, fromY, toX, toY);

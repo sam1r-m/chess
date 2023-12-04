@@ -27,6 +27,8 @@ void Game::processCommand(const std::string& command) {
             if (startGame(wp, bp)){
                 gameMode = true;
                 std::cout << board;
+                std::cout << "Game start." << std::endl;
+
             } else {
                 std::cout << "Invalid player type. Expected: game (human/computer[1/2/3/4]) (human/computer[1/2/3/4])" << std::endl;
             }
@@ -36,6 +38,7 @@ void Game::processCommand(const std::string& command) {
         } else if (cmd == "setup") {
             setUpMode = true;
             std::cout << board;
+            std::cout << "Entering setup mode." << std::endl;
             return;
 
         } else {
@@ -98,7 +101,7 @@ void Game::processCommand(const std::string& command) {
                 }
             }
 
-            // blackTurn = !blackTurn;
+            std::cout << board;
 
             if (checkmate) {
                 cout << "Checkmate! ";
@@ -119,9 +122,16 @@ void Game::processCommand(const std::string& command) {
                 }
                 cout << " is in check."  << endl;
 
-            }
+            } else {
 
-            std::cout << board;
+                if (blackTurn) {
+                    cout << "Black's ";
+                } else {
+                    cout << "White's ";
+                }
+                cout << "turn next."  << endl;
+
+            }
 
         } else {
             std::cout << "Invalid command." << std::endl;
@@ -164,7 +174,9 @@ void Game::processCommand(const std::string& command) {
             //  first or last row, and that neither king is in check before leaving
             if (validSetup()){
                 std::cout << board;
+                std::cout << "Leaving setup mode." << std::endl;
                 setUpMode = false;
+
             } else {
                 std::cout << "Invalid setup." << std::endl;
             }

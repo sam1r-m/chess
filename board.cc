@@ -142,7 +142,7 @@ void Board::makeMove(int fromX, int fromY, int toX, int toY){
 
     removePieceAt(toX, toY);
 
-    for (int i = 0; i < pieces.size(); ++i){
+    for (std::size_t i = 0; i < pieces.size(); ++i){
         if (p == pieces[i].get()) {
             pieces[i]->setX(toX);
             pieces[i]->setY(toY);

@@ -18,7 +18,7 @@ void Player::generateAllMoves(){
                 pieceMoves = b->getSquareAt(i, j).getPiece()->generateMoves(b);
 
                 //add Piece Moves to playerMoves vector
-                for (int k = 0; k < pieceMoves.size(); k++){
+                for (std::size_t k = 0; k < pieceMoves.size(); k++){
                     playerMoves.emplace_back(pieceMoves[k]);  
                 }   
             }

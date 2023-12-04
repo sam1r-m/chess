@@ -3,7 +3,7 @@
 #include "piece.h"
 
 class Rook: public Piece{
-    bool firstMove; // to check if castling is possible
+    mutable bool firstMove; // to check if castling is possible
 
 public:
     Rook(Color col, int posX, int posY);
