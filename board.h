@@ -26,7 +26,7 @@ class Board {
     std::vector<std::unique_ptr<Piece>> removedPieces; // All the pieces taken from the board 
     const int boardSize = 8;
     std::unique_ptr<TextDisplay> td;
-    std::unique_ptr<GraphicsDisplay> gd;
+    //std::unique_ptr<GraphicsDisplay> gd;       // COMMENTED OUT
 
     public:
     Board();

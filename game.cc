@@ -2,13 +2,17 @@
 #include "move.h"
 #include <vector>
 #include <string>
+#include "graphicsDisplay.h"
 using namespace std;
 
 bool validCoords(int x, int y) {
     return (1 <= x) && (x <= 8) && (1 <= y) && (y <= 8);
 }
 
-Game::Game() {
+// Game::Game() : graphicsDisplay(500,500,8,board.getBoard()) { // Initialize graphicalDisplay in constructor
+//     board.initializeBoard();
+// }
+Game::Game() : graphicsDisplay(board.getBoard()) { // Initialize graphicalDisplay in constructor
     board.initializeBoard();
 }
 
@@ -28,6 +32,7 @@ void Game::processCommand(const std::string& command) {
             if (startGame(wp, bp)){
                 gameMode = true;
                 std::cout << board;
+                graphicsDisplay.drawBoard();
                 std::cout << "Game start." << std::endl;
 
             } else {
@@ -39,6 +44,7 @@ void Game::processCommand(const std::string& command) {
         } else if (cmd == "setup") {
             setUpMode = true;
             std::cout << board;
+            //graphicsDisplay.drawBoard();
             std::cout << "Entering setup mode." << std::endl;
             return;
 
@@ -69,7 +75,7 @@ void Game::processCommand(const std::string& command) {
                 std::cout << board;
 
             }
-
+            graphicsDisplay.drawBoard();
             std::cout << "Undo previous move. ";
 
             if (blackTurn) {
@@ -125,7 +131,7 @@ void Game::processCommand(const std::string& command) {
             }
 
             std::cout << board;
-
+            graphicsDisplay.drawBoard();
             //check if Player is in check (opponent has Move that
             //  can take King)
             if (blackTurn && inCheck(Color::BLACK)) std::cout << "Black is in check." << std::endl;
