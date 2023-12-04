@@ -1,13 +1,18 @@
 #include "game.h"
 #include <vector>
 #include <string>
+#include "graphicsDisplay.h"
 using namespace std;
 
 bool validCoords(int x, int y) {
     return (1 <= x) && (x <= 8) && (1 <= y) && (y <= 8);
 }
 
-Game::Game() {
+// Game::Game() {
+//     board.initializeBoard();
+// }
+
+Game::Game() : graphicsDisplay(board.getBoard()) { // Initialize graphicalDisplay in constructor
     board.initializeBoard();
 }
 
@@ -27,6 +32,7 @@ void Game::processCommand(const std::string& command) {
             if (startGame(wp, bp)){
                 gameMode = true;
                 std::cout << board;
+                graphicsDisplay.drawBoard();
             } else {
                 std::cout << "Invalid player type. Expected: game (human/computer[1/2/3/4]) (human/computer[1/2/3/4])" << std::endl;
             }
@@ -64,8 +70,8 @@ void Game::processCommand(const std::string& command) {
                 // blackPlayer.get()->makeMove();
 
             } else if (!(whitePlayer.get()->isHuman()) && !blackTurn){
-                // whitePlayer.get()->generateAllMoves();
-                // whitePlayer.get()->makeMove();
+                whitePlayer.get()->generateAllMoves();
+                whitePlayer.get()->makeMove();
 
             //if current Player is a Human, require start and end
             //  coordinates as part of input
@@ -87,8 +93,8 @@ void Game::processCommand(const std::string& command) {
                         // blackPlayer.get()->generateAllMoves();
                         // blackPlayer.get()->makeMove();
                     } else {
-                        // whitePlayer.get()->generateAllMoves();
-                        // whitePlayer.get()->makeMove();
+                        whitePlayer.get()->generateAllMoves();
+                        whitePlayer.get()->makeMove();
                     }
 
                 } else {
@@ -121,6 +127,7 @@ void Game::processCommand(const std::string& command) {
             }
 
             std::cout << board;
+            graphicsDisplay.drawBoard();
 
         } else {
             std::cout << "Invalid command." << std::endl;

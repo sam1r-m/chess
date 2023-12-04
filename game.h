@@ -1,4 +1,3 @@
-// Controller
 #include <iostream>
 #include <vector>
 #include <sstream>
@@ -12,6 +11,7 @@
 #include "bishop.h"
 #include "queen.h"
 #include "king.h"
+#include "graphicsDisplay.h"
 
 #include "player.h"
 #include "human.h"
@@ -31,6 +31,7 @@ class Game {
     std::unique_ptr<Player> whitePlayer; 
     std::unique_ptr<Player> blackPlayer;
     float whiteScore, blackScore; //stores white and black's scores
+    GraphicsDisplay graphicsDisplay;
 
     std::vector<int> convert(std::string val);
     bool startGame(std::string wp, std::string bp);
