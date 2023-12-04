@@ -15,6 +15,7 @@ class Move {
     int getEndX() const;
     int getEndY() const;
     bool doesCapture() const;
+    bool getsCaptured() const;
 };
 
 #endif

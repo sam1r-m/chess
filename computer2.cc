@@ -7,7 +7,7 @@ Computer2::Computer2(Color c, Board *board): Player(c, board) {
 Computer2::~Computer2() {}
 
 bool Computer2::makeMove(int fromX, int fromY, int toX, int toY){
-    //Level 2 Computer makes capturing moves
+    //Level 2 Computer makes capturing moves:
     for (std::size_t i = 0; i < playerMoves.size(); ++i){
         if (playerMoves[i].doesCapture()){
             b->makeMove(playerMoves[i].getStartX(), playerMoves[i].getStartY(), 
@@ -16,9 +16,13 @@ bool Computer2::makeMove(int fromX, int fromY, int toX, int toY){
         }
     }
 
-    //if no capturing moves possible, make random move
+    // make checking move:
+
+    //
+
+    //if no capturing moves possible, make random move:
     if (playerMoves.empty()) {
-        return false; // when there are no available moves?
+        return false;
     }
 
     int length = playerMoves.size() - 1;
