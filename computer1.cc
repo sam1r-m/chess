@@ -3,7 +3,7 @@
 #include<cstdlib>
 #include <ctime>
 
-Computer1::Computer1(Color c, Board *board): Computer(c, board) {}
+Computer1::Computer1(Color c, Board *board): Player(c, board) {}
 Computer1::~Computer1() {}
 
 bool Computer1::makeMove(int fromX, int fromY, int toX, int toY) {

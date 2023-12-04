@@ -26,3 +26,8 @@ int Move::getEndY() const {
 bool Move::doesCapture() const {
     return captures;
 }
+
+bool Move::getsCaptured() const {
+    // add logic for whether the move can get captured
+    return false; // placeholder
+}

@@ -1,9 +1,9 @@
 #ifndef __COMPUTER1_H__
 #define __COMPUTER1_H__
 
-#include "computer.h"
+#include "player.h"
 
-class Computer1: public Computer {
+class Computer1: public Player {
 
     public:
         Computer1(Color c, Board *board);
