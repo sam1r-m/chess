@@ -19,7 +19,7 @@ class Player {
         void generateAllMoves();
         virtual bool makeMove(int fromX, int fromY, int toX, int toY) = 0;
         void undoMove();
-        std::vector<Move> getMoves();
+        std::vector<Move>& getMoves();
         bool isHuman();
         bool inCheck(Player *enemyPlayer);
 };

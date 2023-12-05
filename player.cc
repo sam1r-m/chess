@@ -1,5 +1,6 @@
 #include "player.h"
 #include "board.h"
+#include "piece.h"
 
 Player::Player(Color c, Board *board): playerColor {c}, b {board} {}
 
@@ -27,6 +28,7 @@ void Player::generateAllMoves(){
     }
 }
 
+
 void Player::undoMove(){
     if (prevMoves.size() == 0) return;
     int startX = prevMoves[prevMoves.size() - 1].getStartX();
@@ -45,7 +47,7 @@ void Player::undoMove(){
     prevMoves.pop_back();
 }
 
-std::vector<Move> Player::getMoves(){
+std::vector<Move>& Player::getMoves() {
     return playerMoves;
 }
 
@@ -62,7 +64,7 @@ bool Player::inCheck(Player *enemyPlayer){
     //see if enemy Player has a capturing Move on Square with Player King
     enemyPlayer->generateAllMoves();
     for (std::size_t i = 0; i < enemyPlayer->getMoves().size(); ++i){
-
+        
         if (enemyPlayer->getMoves()[i].doesCapture()) {
             int endX = enemyPlayer->getMoves()[i].getEndX();
             int endY = enemyPlayer->getMoves()[i].getEndY();

@@ -31,8 +31,12 @@ class Game {
     std::unique_ptr<Player> blackPlayer;
     float whiteScore, blackScore; //stores white and black's scores
     GraphicsDisplay graphicsDisplay; // Display
+
     std::vector<int> convert(std::string val); //converts a textual position (e.g. "a1") to board indices
     bool startGame(std::string wp, std::string bp);
+    void filterChecks(Player *currPlayer, Player *enemyPlayer);
+    bool executeMove(Player *currPlayer, Player *enemyPlayer, int fromX, int fromY, int toX, int toY);
+    bool isStalemate(Player *currPlayer, Player * enemyPlayer);
     void addPiece(std::string pieceType, std::string posn);
     void changeTurn(std::string color);
     bool validSetup();

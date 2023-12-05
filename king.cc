@@ -34,6 +34,14 @@ char King::getChar() const{
 std::vector<Move> King::generateMoves(Board *board) const{
     std::vector<Move> moves;
 
+    //check if King has moved yet
+    if (color == Color::BLACK){
+        if (y != 8 || x != 5) firstMove = false;
+    } 
+    else {
+        if (y != 1 || x != 5) firstMove = false;
+    }
+
     // One square in every direction
     for (int deltaX = -1; deltaX <= 1; ++deltaX) {
         for (int deltaY = -1; deltaY <= 1; ++deltaY) {

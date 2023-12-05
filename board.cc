@@ -95,13 +95,14 @@ void Board::initializeBoard(){
 }
 
 void Board::resetBoard(){
-    pieces.clear();
+    // pieces.clear();
+    
     for (int i = 1; i <= boardSize; ++i){
         for (int j = 1; j <= boardSize; ++j){
             removePieceAt(i, j);
         }
     }
-
+    removedPieces.clear();
     //remove Observers
     for (int k = 0; k < boardSize; ++k){
         for (int l = 0; l < boardSize; ++l){
