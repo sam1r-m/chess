@@ -190,11 +190,6 @@ void Game::processCommand(const std::string& command) {
                 std::cout << "Invalid coordinates. Expected: - (a-h)(1-8)" << std::endl;
             }
 
-        } else if (cmd == "reset") {
-            board.resetBoard();
-            std::cout << board;
-            graphicsDisplay.drawBoard();
-
         } else if (cmd == "=") {
             std::string color;
             iss >> color;
