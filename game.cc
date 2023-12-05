@@ -44,7 +44,7 @@ void Game::processCommand(const std::string& command) {
         } else if (cmd == "setup") {
             setUpMode = true;
             std::cout << board;
-            //graphicsDisplay.drawBoard();
+            graphicsDisplay.drawBoard();
             std::cout << "Entering setup mode." << std::endl;
             return;
 
@@ -68,11 +68,13 @@ void Game::processCommand(const std::string& command) {
                 whitePlayer.get()->undoMove();
                 blackTurn = !blackTurn;
                 std::cout << board;
+                graphicsDisplay.drawBoard();
 
             } else {
                 blackPlayer.get()->undoMove();
                 blackTurn = !blackTurn;
                 std::cout << board;
+                graphicsDisplay.drawBoard();
 
             }
             graphicsDisplay.drawBoard();
@@ -90,7 +92,6 @@ void Game::processCommand(const std::string& command) {
         } else if (cmd == "move") {
 
             //if current Player is a Computer, only need "move" command
-
             if (!(blackPlayer.get()->isHuman()) && blackTurn){
                 blackPlayer.get()->generateAllMoves();
                 if (blackPlayer.get()->makeMove(0, 0, 0, 0)) blackTurn = !blackTurn;
@@ -132,10 +133,11 @@ void Game::processCommand(const std::string& command) {
 
             std::cout << board;
             graphicsDisplay.drawBoard();
+
             //check if Player is in check (opponent has Move that
             //  can take King)
-            if (blackTurn && inCheck(Color::BLACK)) std::cout << "Black is in check." << std::endl;
-            if (!blackTurn && inCheck(Color::WHITE)) std::cout << "White is in check." << std::endl;
+            if (blackTurn && blackPlayer.get()->inCheck(whitePlayer.get())) std::cout << "Black is in check." << std::endl;
+            if (!blackTurn && whitePlayer.get()->inCheck(blackPlayer.get())) std::cout << "White is in check." << std::endl;
 
             if (checkmate) {
                 cout << "Checkmate! ";
@@ -184,6 +186,7 @@ void Game::processCommand(const std::string& command) {
             if (validCoords(x, y)){
                 board.removePieceAt(x,y);
                 std::cout << board;
+                graphicsDisplay.drawBoard();
             } else {
                 std::cout << "Invalid coordinates. Expected: - (a-h)(1-8)" << std::endl;
             }
@@ -199,6 +202,7 @@ void Game::processCommand(const std::string& command) {
             //  first or last row, and that neither king is in check before leaving
             if (validSetup()){
                 std::cout << board;
+                graphicsDisplay.drawBoard();
                 std::cout << "Leaving setup mode." << std::endl;
                 setUpMode = false;
 
@@ -325,6 +329,7 @@ void Game::addPiece(string pieceType, string posn) {
         return;
     }
     std::cout << board;
+    graphicsDisplay.drawBoard();
 }
 
 void Game::changeTurn(std::string color){
@@ -337,49 +342,6 @@ void Game::changeTurn(std::string color){
         blackTurn = false;
     }
     else std::cout << "Invalid color. Expected: = (black/white)" << std::endl;
-}
-
-bool Game::inCheck(Color color){
-    char pieceAt;
-    if (color == Color::BLACK) {
-        //see if White Player has a capturing Move on Square with Black King
-        whitePlayer.get()->generateAllMoves();
-
-        for (std::size_t i = 0; i < whitePlayer.get()->getMoves().size(); ++i){
-
-            if (whitePlayer.get()->getMoves()[i].doesCapture()) {
-                int endX = whitePlayer.get()->getMoves()[i].getEndX();
-                int endY = whitePlayer.get()->getMoves()[i].getEndY();
-                pieceAt = board.getSquareAt(endX - 1, 8 - endY).getPiece()->getChar();
-
-                if (pieceAt == 'k') {
-                    return true;
-
-                }
-            }
-                        
-        }
-
-    //see if Black Player has a capturing Move on Square with White King
-     } else {
-        blackPlayer.get()->generateAllMoves();
-
-        for (std::size_t i = 0; i < blackPlayer.get()->getMoves().size(); ++i){
-
-            if (blackPlayer.get()->getMoves()[i].doesCapture()) {
-                int endX = blackPlayer.get()->getMoves()[i].getEndX();
-                int endY = blackPlayer.get()->getMoves()[i].getEndY();
-                pieceAt = board.getSquareAt(endX - 1, 8 - endY).getPiece()->getChar();
-
-                if (pieceAt == 'K') {
-                    return true;
-
-                }
-            }
-                        
-        }
-     }
-     return false;
 }
 
 bool Game::validSetup(){
@@ -438,7 +400,7 @@ bool Game::validSetup(){
     //  Players to generate Moves
     whitePlayer = std::make_unique<Human>(Color::WHITE, &board);
     blackPlayer = std::make_unique<Human>(Color::BLACK, &board);
-    if (inCheck(Color::WHITE) || inCheck(Color::BLACK)) {
+    if (whitePlayer.get()->inCheck(blackPlayer.get()) || blackPlayer.get()->inCheck(whitePlayer.get())) {
         std::cout << "A Player is in check. ";
         return false;
     }

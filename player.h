@@ -21,6 +21,7 @@ class Player {
         void undoMove();
         std::vector<Move> getMoves();
         bool isHuman();
+        bool inCheck(Player *enemyPlayer);
 };
 
 #endif

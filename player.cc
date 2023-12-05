@@ -1,4 +1,5 @@
 #include "player.h"
+#include "board.h"
 
 Player::Player(Color c, Board *board): playerColor {c}, b {board} {}
 
@@ -50,4 +51,28 @@ std::vector<Move> Player::getMoves(){
 
 bool Player::isHuman(){
     return humanPlayer;
+}
+
+bool Player::inCheck(Player *enemyPlayer){
+    char playerKing;
+    char pieceAt;
+    if (playerColor == Color::WHITE) playerKing = 'K';
+    else playerKing = 'k';
+
+    //see if enemy Player has a capturing Move on Square with Player King
+    enemyPlayer->generateAllMoves();
+    for (std::size_t i = 0; i < enemyPlayer->getMoves().size(); ++i){
+
+        if (enemyPlayer->getMoves()[i].doesCapture()) {
+            int endX = enemyPlayer->getMoves()[i].getEndX();
+            int endY = enemyPlayer->getMoves()[i].getEndY();
+            pieceAt = b->getSquareAt(endX - 1, 8 - endY).getPiece()->getChar();
+
+            if (pieceAt == playerKing) {
+                return true;
+
+            }
+        }               
+    }
+     return false;
 }

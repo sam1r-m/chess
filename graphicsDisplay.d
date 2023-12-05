@@ -1,2 +1,2 @@
-graphicsDisplay.o: graphicsDisplay.cc graphicsDisplay.h observer.h \
- window.h square.h piece.h move.h
+graphicsDisplay.o: graphicsDisplay.cc graphicsDisplay.h window.h square.h \
+ piece.h move.h observer.h
