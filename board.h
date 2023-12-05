@@ -6,15 +6,8 @@
 #include "textDisplay.h"
 #include "graphicsDisplay.h"
 #include "piece.h"
-#include "pawn.h"
-#include "rook.h"
-#include "knight.h"
-#include "bishop.h"
-#include "queen.h"
-#include "king.h"
 
 #include <vector>
-#include <string>
 #include <memory>
 #include <iostream>
 
@@ -26,27 +19,22 @@ class Board {
     std::vector<std::unique_ptr<Piece>> removedPieces; // All the pieces taken from the board 
     const int boardSize = 8;
     std::unique_ptr<TextDisplay> td;
-    //std::unique_ptr<GraphicsDisplay> gd;       // COMMENTED OUT
 
     public:
     Board();
     ~Board();
 
     void initializeBoard();
-    void resetBoard();
+    void resetBoard();  //removes all Pieces from the Board
 
-    bool isCheck(Color color) const;
-    bool isCheckmate(Color color) const;
-    bool isStalemate(Color color) const; 
-    // added getSquareAt(int x, int y) and getBoard() method which returns board
-    const Square& getSquareAt(int x, int y) const;
-    const std::vector<std::vector<Square>>& getBoard() const;
-    void addPieceAt(int x, int y, std::unique_ptr<Piece> piece);
-    void removePieceAt(int x, int y);
-    std::unique_ptr<Piece> getRemovedPiece();
+    const Square& getSquareAt(int x, int y) const;  //returns address of Square at array index x, y
+    const std::vector<std::vector<Square>>& getBoard() const;   
+    void addPieceAt(int x, int y, std::unique_ptr<Piece> piece);    //adds Piece on Square with coordinates x, y
+    void removePieceAt(int x, int y);   //removes Piece on Square with coordinates x, y
+    std::unique_ptr<Piece> getRemovedPiece();   //returns most recently removed Piece from removedPieces vector
 
-    void makeMove(int fromX, int fromY, int toX, int toY);
-    friend std::ostream &operator<<(std::ostream &out, const Board &b);
+    void makeMove(int fromX, int fromY, int toX, int toY);  //moves Piece, removing enemy Piece present at target Square
+    friend std::ostream &operator<<(std::ostream &out, const Board &b); //outputs textDisplay
 };
 
 #endif

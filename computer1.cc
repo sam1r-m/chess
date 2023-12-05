@@ -6,6 +6,7 @@
 Computer1::Computer1(Color c, Board *board): Player(c, board) {}
 Computer1::~Computer1() {}
 
+//computer's don't need input for movement
 bool Computer1::makeMove(int fromX = 0, int fromY = 0, int toX = 0, int toY = 0) {
     if (playerMoves.empty()) {
         return false; // when there are no available moves?

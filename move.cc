@@ -1,7 +1,4 @@
 #include "move.h"
-#include <iostream>
-#include <string>
-#include <vector>
 using namespace std;
 
 Move::Move(int startX, int startY, int endX, int endY, bool captures) 

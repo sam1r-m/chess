@@ -1,5 +1,12 @@
 #include "board.h"
+#include "pawn.h"
+#include "rook.h"
+#include "knight.h"
+#include "bishop.h"
+#include "queen.h"
+#include "king.h"
 using namespace std;
+
 // changeCoords(x, y) converts given x and y 
 //  coordinates into their corresponding array indices
 void changeCoords(int *x, int *y){
@@ -24,7 +31,6 @@ Board::~Board() {}
 
 void Board::initializeBoard(){
     td = std::make_unique<TextDisplay>();
-    //gd = std::make_unique<GraphicsDisplay>(500, 500, 8);       // COMMENTED OUT
 
     //add Black Pieces
     std::unique_ptr<Rook> BRook1 = std::make_unique<Rook>(Color::BLACK, 1, 8);
@@ -89,7 +95,6 @@ void Board::initializeBoard(){
     for (int k = 0; k < boardSize; ++k){
         for (int l = 0; l < boardSize; ++l){
             board[k][l].attach(td.get());
-            //board[k][l].attach(gd.get());      // COMMENTED OUT
         }
     }
 }

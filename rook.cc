@@ -1,12 +1,9 @@
 #include "rook.h"
 #include "board.h"
-#include <iostream>
 
 Rook::Rook(Color col, int posX, int posY): Piece {col, posX, posY}, firstMove {true} {}
 
-Rook::~Rook(){
-
-}
+Rook::~Rook(){}
 
 bool Rook::isValidMove(int toX, int toY, Board *board) const{
     //make sure Move is within Board

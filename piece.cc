@@ -1,6 +1,4 @@
 #include "piece.h"
-#include <iostream>
-using namespace std;
 
 Piece::Piece(Color col, int posX, int posY) : color(col), x(posX), y(posY) {}
 

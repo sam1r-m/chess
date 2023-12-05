@@ -2,11 +2,10 @@
 #define __MOVE_H__
 
 class Move {
-    int startX, startY, endX, endY;
-    bool captures;
+    int startX, startY, endX, endY; //stores start and end coordinates
+    bool captures;  //true if Move captures an enemy Piece
 
     public:
-    // Constructor
     Move(int startX, int startY, int endX, int endY, bool captures);
 
     // Accessors

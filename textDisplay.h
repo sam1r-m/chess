@@ -14,10 +14,9 @@ class TextDisplay: public Observer {
     TextDisplay();
     ~TextDisplay();
 
-    void addPiece(int x, int y, char piece);
-    void notify(Square &s) override;
-
-    friend std::ostream &operator<<(std::ostream &out, const TextDisplay &td);
+    void addPiece(int x, int y, char piece);    //helper to add Piece chars to Display
+    void notify(Square &s) override;    //updates char to Piece or Square char
+    friend std::ostream &operator<<(std::ostream &out, const TextDisplay &td);  //outputs textDisplay with coordinate indices along sides
 };
 
 #endif

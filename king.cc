@@ -1,7 +1,5 @@
 #include "king.h"
 #include "board.h"
-
-#include <iostream>
 #include <cmath>
 
 King::King(Color col, int posX, int posY): Piece {col, posX, posY}, firstMove {true} {}

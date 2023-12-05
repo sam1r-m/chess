@@ -1,12 +1,9 @@
 #include "pawn.h"
 #include "board.h"
-#include <iostream>
 
 Pawn::Pawn(Color col, int posX, int posY): Piece {col, posX, posY}, firstMove {true} {}
 
-Pawn::~Pawn(){
-
-}
+Pawn::~Pawn(){}
 
 bool Pawn::isValidMove(int toX, int toY, Board *board) const{
     

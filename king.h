@@ -4,7 +4,7 @@
 #include "piece.h"
 
 class King: public Piece{
-    mutable bool firstMove; // to check if castling is possible
+    mutable bool firstMove; //check if castling is possible
 
 public:
     King(Color col, int posX, int posY);

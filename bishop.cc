@@ -1,12 +1,9 @@
 #include "bishop.h"
 #include "board.h"
-#include <iostream>
 
 Bishop::Bishop(Color col, int posX, int posY): Piece {col, posX, posY} {}
 
-Bishop::~Bishop(){
-
-}
+Bishop::~Bishop(){}
 
 bool Bishop::isValidMove(int toX, int toY, Board *board) const{
     //make sure Move is within Board

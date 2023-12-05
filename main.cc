@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include "game.h"
-#include "graphicsDisplay.h"
 
 using namespace std;
 
@@ -18,5 +17,4 @@ int main() {
         cout << "White: " << g.getWScore() << endl;
         cout << "Black " << g.getBScore() << endl;
     }
-
 }

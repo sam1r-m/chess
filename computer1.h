@@ -8,7 +8,7 @@ class Computer1: public Player {
     public:
         Computer1(Color c, Board *board);
         ~Computer1();
-        virtual bool makeMove(int fromX, int fromY, int toX, int toY) override;
+        virtual bool makeMove(int fromX, int fromY, int toX, int toY) override; //makes random legal Move
 };
 
 #endif

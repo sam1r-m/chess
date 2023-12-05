@@ -1,18 +1,29 @@
-#include "game.h"
-#include "move.h"
 #include <vector>
 #include <string>
-#include "graphicsDisplay.h"
+
+#include "game.h"
+#include "move.h"
+
+#include "pawn.h"
+#include "rook.h"
+#include "knight.h"
+#include "bishop.h"
+#include "queen.h"
+#include "king.h"
+
+#include "human.h"
+#include "computer1.h"
+#include "computer2.h"
+#include "computer3.h"
+#include "computer4.h"
+
 using namespace std;
 
 bool validCoords(int x, int y) {
     return (1 <= x) && (x <= 8) && (1 <= y) && (y <= 8);
 }
 
-// Game::Game() : graphicsDisplay(500,500,8,board.getBoard()) { // Initialize graphicalDisplay in constructor
-//     board.initializeBoard();
-// }
-Game::Game() : graphicsDisplay(board.getBoard()) { // Initialize graphicalDisplay in constructor
+Game::Game() : graphicsDisplay(board.getBoard()) { // Initialize graphicsDisplay in constructor
     board.initializeBoard();
 }
 
@@ -55,7 +66,7 @@ void Game::processCommand(const std::string& command) {
 
     }
 
-    // check if Game is in gameMode, only accepts resign
+    // check if Game is in gameMode, only accepts resign, undo,
     //  or move commands
     if (gameMode){
 
@@ -86,29 +97,7 @@ void Game::processCommand(const std::string& command) {
                 }
                 cout << "turn again."  << endl;
 
-        //different for computer (no coordinates), pawn promotion takes 
-        //  in additional argument
         } else if (cmd == "move") {
-
-            // //if current Player is a Computer, only need "move" command
-            // if (!(blackPlayer.get()->isHuman()) && blackTurn){
-            //     blackPlayer.get()->generateAllMoves();
-            //     filterChecks(blackPlayer.get(), whitePlayer.get());
-
-            //     if (blackPlayer.get()->getMoves().size() == 0 && blackPlayer.get()->inCheck(whitePlayer.get()))
-
-            //     if (blackPlayer.get()->makeMove(0, 0, 0, 0)) blackTurn = !blackTurn;
-
-            // } else if (!(whitePlayer.get()->isHuman()) && !blackTurn){
-            //     whitePlayer.get()->generateAllMoves();
-            //     filterChecks(whitePlayer.get(), blackPlayer.get());
-
-
-            //     if (whitePlayer.get()->makeMove(0, 0, 0, 0)) blackTurn = !blackTurn;
-
-            // //if current Player is a Human, require start and end
-            // //  coordinates as part of input
-            // } else {
             Player *currPlayer;
             Player *enemyPlayer;
 
@@ -133,24 +122,10 @@ void Game::processCommand(const std::string& command) {
                 if (!currPlayer->isHuman() || (validCoords(fromX, fromY) && validCoords(toX, toY))){
                     if (executeMove(currPlayer, enemyPlayer, fromX, fromY, toX, toY)) blackTurn = !blackTurn;
 
-                    // if (blackTurn){
-                    //     if (executeMove(blackPlayer.get(), whitePlayer.get(), fromX, fromY, toX, toY)) blackTurn = !blackTurn;
-                    //     blackPlayer.get()->generateAllMoves();
-                    //     filterChecks(blackPlayer.get(), whitePlayer.get());
-                    //     if (blackPlayer.get()->makeMove(fromX, fromY, toX, toY)) blackTurn = !blackTurn;
-
-                    // } else {
-                    //     if (executeMove(whitePlayer.get(), blackPlayer.get(), fromX, fromY, toX, toY)) blackTurn = !blackTurn;
-                    //     whitePlayer.get()->generateAllMoves();
-                    //     filterChecks(whitePlayer.get(), blackPlayer.get());
-                    //     if (whitePlayer.get()->makeMove(fromX, fromY, toX, toY)) blackTurn = !blackTurn;
-                    // }
-
                 } else {
                     std::cout << "Invalid coordinates. Expected: move (a-h)(1-8) (a-h)(1-8)" << std::endl;
                     return;
                 }
-            // }
 
             std::cout << board;
             graphicsDisplay.drawBoard();
@@ -172,22 +147,6 @@ void Game::processCommand(const std::string& command) {
                     std::cout << "White ";
                 }
                 std::cout << "is in check." << std::endl;
-            // }
-
-            // //check if opponent Player is in check (current Player has Move that
-            // //  can take King)
-            // if (blackTurn && blackPlayer.get()->inCheck(whitePlayer.get())) std::cout << "Black is in check." << std::endl;
-            // if (!blackTurn && whitePlayer.get()->inCheck(blackPlayer.get())) std::cout << "White is in check." << std::endl;
-
-            // if (checkmate) {
-            //     cout << "Checkmate! ";
-            //     endGame();
-
-            // } else if (stalemate) {
-            //     whiteScore += 0.5;
-            //     blackScore += 0.5;
-            //     cout << "Stalemate!" << endl;
-            //     gameMode = false;
 
             } else {
 
@@ -310,7 +269,6 @@ bool Game::startGame(std::string wp, std::string bp){
 void Game::filterChecks(Player *currPlayer, Player *enemyPlayer) {
     const auto& moves = currPlayer->getMoves();
     
-    // Use a range-based for loop to directly modify the vector in-place
     for (auto it = moves.begin(); it != moves.end();) {
         int fromX = it->getStartX();
         int fromY = it->getStartY();
@@ -319,15 +277,15 @@ void Game::filterChecks(Player *currPlayer, Player *enemyPlayer) {
 
         currPlayer->makeMove(fromX, fromY, toX, toY);
 
-        // If the move puts Player in check, remove it from playerMoves
+        //if the move puts Player in check, remove it from playerMoves
         if (currPlayer->inCheck(enemyPlayer)) {
-            // Use erase to remove the current element and update the iterator
             it = currPlayer->getMoves().erase(it);
+
         } else {
             ++it;
         }
 
-        // Undo Move after checking
+        //undo Move after checking
         currPlayer->undoMove();
     }
 }
@@ -505,6 +463,4 @@ void Game::endGame(){
     board.initializeBoard();
     gameMode = false;
     blackTurn = false; 
-    checkmate = false; 
-    stalemate = false;
 }
