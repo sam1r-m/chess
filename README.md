@@ -1,3 +1,3 @@
-C246 Project (Fall 2023): Chess
+OOP Chess Project
 
-Group Members: Samir Mohammed, Ian Yu, and Wasitul Hoque
+Samir Mohammed, Ian Yu, and Wasitul Hoque
